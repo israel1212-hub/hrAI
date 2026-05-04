@@ -93,12 +93,12 @@ export default async function Dashboard() {
     <AppShell userEmail={user.email} rightPanel={rightPanel}>
 
       {/* ── Stats row ─────────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl p-5 border border-[#F1F5F9] shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-bold text-[#0F172A] font-syne">Overview</span>
-          <span className="text-[10px] text-[#94A3B8] bg-[#F8FAFC] px-2 py-1 rounded-lg border border-[#F1F5F9]">This month</span>
+      <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <span className="text-xs sm:text-sm font-bold text-[#0F172A] font-syne">Overview</span>
+          <span className="text-[9px] sm:text-[10px] text-[#94A3B8] bg-[#F8FAFC] px-2 py-0.5 sm:py-1 rounded-lg border border-[#F1F5F9]">This month</span>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 gap-2 sm:gap-4">
           {[
             { label: "Sessions", value: sessionCount ?? 0, color: "text-[#0F172A]" },
             { label: "Questions", value: questionCount ?? 0, color: "text-[#0F172A]" },
@@ -106,7 +106,7 @@ export default async function Dashboard() {
             { label: "Status", value: "Active", color: "text-[#7C3AED]" },
           ].map((s) => (
             <div key={s.label}>
-              <p className={`text-2xl font-extrabold font-syne ${s.color}`}>{s.value}</p>
+              <p className={`text-lg sm:text-2xl font-extrabold font-syne ${s.color}`}>{s.value}</p>
               <p className="text-[#94A3B8] text-xs mt-0.5">{s.label}</p>
             </div>
           ))}
@@ -114,60 +114,60 @@ export default async function Dashboard() {
       </div>
 
       {/* ── Quick actions ─────────────────────────────────────────────────── */}
-      <div className="bg-white rounded-2xl p-5 border border-[#F1F5F9] shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-bold text-[#0F172A] font-syne">Quick Actions</span>
-          <ArrowUpRight size={14} className="text-[#94A3B8]" />
+      <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <span className="text-xs sm:text-sm font-bold text-[#0F172A] font-syne">Quick Actions</span>
+          <ArrowUpRight size={12} className="sm:size-[14px] text-[#94A3B8]" />
         </div>
-        <div className="grid sm:grid-cols-2 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           <Link
             href="/interview"
-            className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] text-white hover:opacity-90 transition-opacity group"
+            className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] text-white hover:opacity-90 transition-opacity group"
           >
-            <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-              <ClipboardList size={16} />
+            <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+              <ClipboardList size={14} className="sm:size-[16px]" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-sm font-syne">Start Interview</p>
-              <p className="text-blue-200 text-xs truncate">Run a candidate session</p>
+              <p className="font-bold text-xs sm:text-sm font-syne">Start Interview</p>
+              <p className="text-blue-200 text-[10px] sm:text-xs truncate">Run a candidate session</p>
             </div>
-            <ArrowRight size={14} className="shrink-0 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={12} className="sm:size-[14px] shrink-0 group-hover:translate-x-1 transition-transform" />
           </Link>
 
           <Link
             href="/interview/admin"
-            className="flex items-center gap-3 p-4 rounded-xl bg-[#F8FAFC] border border-[#F1F5F9] text-[#0F172A] hover:border-[#7C3AED]/30 transition-colors group"
+            className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-[#F8FAFC] border border-[#F1F5F9] text-[#0F172A] hover:border-[#7C3AED]/30 transition-colors group"
           >
-            <div className="w-9 h-9 rounded-xl bg-[#F3F0FF] flex items-center justify-center shrink-0">
-              <Settings size={16} className="text-[#7C3AED]" />
+            <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-[#F3F0FF] flex items-center justify-center shrink-0">
+              <Settings size={14} className="sm:size-[16px] text-[#7C3AED]" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-sm font-syne">Question Builder</p>
-              <p className="text-[#94A3B8] text-xs truncate">Manage your questions</p>
+              <p className="font-bold text-xs sm:text-sm font-syne">Question Builder</p>
+              <p className="text-[#94A3B8] text-[10px] sm:text-xs truncate">Manage your questions</p>
             </div>
-            <ArrowRight size={14} className="shrink-0 text-[#94A3B8] group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={12} className="sm:size-[14px] shrink-0 text-[#94A3B8] group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
 
       {/* ── Recent activity placeholder ───────────────────────────────────── */}
-      <div className="bg-white rounded-2xl p-5 border border-[#F1F5F9] shadow-sm">
-        <div className="flex items-center justify-between mb-4">
-          <span className="text-sm font-bold text-[#0F172A] font-syne">Recent Sessions</span>
-          <ArrowUpRight size={14} className="text-[#94A3B8]" />
+      <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <span className="text-xs sm:text-sm font-bold text-[#0F172A] font-syne">Recent Sessions</span>
+          <ArrowUpRight size={12} className="sm:size-[14px] text-[#94A3B8]" />
         </div>
         {(sessionCount ?? 0) === 0 ? (
-          <div className="flex flex-col items-center justify-center py-8 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-[#F3F0FF] flex items-center justify-center mb-3">
-              <ClipboardList size={20} className="text-[#7C3AED]" />
+          <div className="flex flex-col items-center justify-center py-6 sm:py-8 text-center">
+            <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl sm:rounded-2xl bg-[#F3F0FF] flex items-center justify-center mb-2 sm:mb-3">
+              <ClipboardList size={16} className="sm:size-[20px] text-[#7C3AED]" />
             </div>
-            <p className="text-[#0F172A] font-semibold text-sm mb-1">No sessions yet</p>
-            <p className="text-[#94A3B8] text-xs mb-4">Start your first interview to see results here</p>
+            <p className="text-[#0F172A] font-semibold text-xs sm:text-sm mb-1">No sessions yet</p>
+            <p className="text-[#94A3B8] text-[10px] sm:text-xs mb-3 sm:mb-4">Start your first interview to see results here</p>
             <Link
               href="/interview"
-              className="flex items-center gap-1.5 px-4 py-2 bg-[#7C3AED] text-white rounded-xl text-xs font-semibold hover:bg-[#6D28D9] transition-colors"
+              className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#7C3AED] text-white rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold hover:bg-[#6D28D9] transition-colors"
             >
-              Start Interview <ArrowRight size={12} />
+              Start Interview <ArrowRight size={10} className="sm:size-[12px]" />
             </Link>
           </div>
         ) : (
