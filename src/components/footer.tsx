@@ -16,7 +16,7 @@ export default function Footer() {
                   <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <span className="text-white font-bold text-lg font-syne">InterviewAI</span>
+              <span className="text-white font-bold text-lg font-syne">HireMind AI</span>
             </Link>
             <p className="text-[#64748B] text-sm leading-relaxed mb-6">
               Pick a template you like, customize it to fit your style without writing any code.
@@ -92,7 +92,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-[#1E293B] flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-[#475569] text-sm">
-            © {currentYear} InterviewAI. All rights reserved.
+            © {currentYear} HireMind AI. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link href="#" className="text-[#475569] hover:text-white text-sm transition-colors">Privacy</Link>

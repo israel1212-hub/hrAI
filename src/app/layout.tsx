@@ -18,7 +18,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "InterviewAI — Text-Based Interview Platform",
+  title: "HireMind AI — Text-Based Interview Platform",
   description: "Structured text interviews with automatic scoring for modern hiring teams.",
 };
 

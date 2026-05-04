@@ -210,7 +210,7 @@ export default function Home() {
                       <div className="flex gap-2">{[0, 1, 2].map((i) => <div key={i} className="w-7 h-7 rounded-lg bg-white/30" />)}</div>
                     </div>
                     <p className="text-white font-bold text-xs font-syne mb-1">Interview Design Features</p>
-                    <p className="text-[#64748B] text-[10px] leading-relaxed">InterviewAI is equipped with the tools you need to run your ultimate hiring process.</p>
+                    <p className="text-[#64748B] text-[10px] leading-relaxed">HireMind AI is equipped with the tools you need to run your ultimate hiring process.</p>
                   </div>
                 </div>
               </div>
