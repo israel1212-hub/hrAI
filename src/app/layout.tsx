@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       
-      <body className={`${syne.variable} ${plusJakarta.variable}`}>
+      <body className={`${syne.variable} ${plusJakarta.variable} font-jakarta antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

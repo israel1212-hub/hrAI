@@ -1,21 +1,24 @@
-import DashboardNavbar from "@/components/dashboard-navbar";
-import { UserCircle, ClipboardList, Settings, ArrowRight } from "lucide-react";
 import { redirect } from "next/navigation";
 import { createClient } from "../../../supabase/server";
 import Link from "next/link";
+import AppShell from "@/components/app-shell";
+import {
+  ClipboardList,
+  Settings,
+  ArrowRight,
+  ArrowUpRight,
+  UserCircle,
+  CheckCircle2,
+  Clock,
+  TrendingUp,
+} from "lucide-react";
 
 export default async function Dashboard() {
   const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  if (!user) return redirect("/sign-in");
 
-  if (!user) {
-    return redirect("/sign-in");
-  }
-
-  // Get session count
   const { count: sessionCount } = await supabase
     .from("interview_sessions")
     .select("*", { count: "exact", head: true })
@@ -26,107 +29,170 @@ export default async function Dashboard() {
     .select("*", { count: "exact", head: true })
     .eq("user_id", user.id);
 
-  return (
+  // Right panel content
+  const rightPanel = (
     <>
-      <DashboardNavbar />
-      <main className="w-full bg-[#F5F7FA] min-h-screen">
-        <div className="max-w-[800px] mx-auto px-6 py-10 flex flex-col gap-8">
-          {/* Header */}
-          <header>
-            <h1
-              className="text-[#0F2B5B] text-3xl font-extrabold mb-1"
-              style={{ fontFamily: "'Syne', sans-serif" }}
-            >
-              Dashboard
-            </h1>
-            <p className="text-[#64748B] text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              Welcome back, {user.email}
-            </p>
-          </header>
+      {/* Profile card */}
+      <div className="bg-white rounded-2xl p-4 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-semibold text-[#0F172A]">Account</span>
+          <ArrowUpRight size={13} className="text-[#94A3B8]" />
+        </div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] flex items-center justify-center text-white font-bold text-sm">
+            {user.email?.[0].toUpperCase()}
+          </div>
+          <div>
+            <p className="text-[#0F172A] font-semibold text-xs truncate max-w-[130px]">{user.email}</p>
+            <p className="text-[#94A3B8] text-[10px]">Active account</p>
+          </div>
+        </div>
+        <div className="w-full h-1.5 bg-[#F1F5F9] rounded-full overflow-hidden mb-1">
+          <div className="h-full w-[65%] bg-gradient-to-r from-[#7C3AED] to-[#4F6EF7] rounded-full" />
+        </div>
+        <p className="text-[#94A3B8] text-[10px]">Plan usage 65%</p>
+      </div>
 
-          {/* Quick Actions */}
-          <div className="grid sm:grid-cols-2 gap-4">
+      {/* Stats card */}
+      <div className="bg-white rounded-2xl p-4 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-xs font-semibold text-[#0F172A]">Activity</span>
+          <ArrowUpRight size={13} className="text-[#94A3B8]" />
+        </div>
+        {/* Donut placeholder */}
+        <div className="flex items-center justify-center mb-4">
+          <div className="relative w-20 h-20">
+            <svg viewBox="0 0 36 36" className="w-20 h-20 -rotate-90">
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#F1F5F9" strokeWidth="3" />
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#7C3AED" strokeWidth="3"
+                strokeDasharray={`${(sessionCount ?? 0) > 0 ? 60 : 20} 100`} strokeLinecap="round" />
+              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#4F6EF7" strokeWidth="3"
+                strokeDasharray="25 100" strokeDashoffset="-60" strokeLinecap="round" />
+            </svg>
+            <div className="absolute inset-0 flex flex-col items-center justify-center">
+              <span className="text-[#0F172A] font-extrabold text-lg font-syne">{sessionCount ?? 0}</span>
+              <span className="text-[#94A3B8] text-[9px]">total</span>
+            </div>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-2 text-center">
+          <div>
+            <p className="text-[#0F172A] font-bold text-sm font-syne">{questionCount ?? 0}</p>
+            <p className="text-[#94A3B8] text-[10px]">Questions</p>
+          </div>
+          <div>
+            <p className="text-[#0F172A] font-bold text-sm font-syne">{sessionCount ?? 0}</p>
+            <p className="text-[#94A3B8] text-[10px]">Sessions</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+
+  return (
+    <AppShell userEmail={user.email} rightPanel={rightPanel}>
+
+      {/* ── Stats row ─────────────────────────────────────────────────────── */}
+      <div className="bg-white rounded-2xl p-5 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm font-bold text-[#0F172A] font-syne">Overview</span>
+          <span className="text-[10px] text-[#94A3B8] bg-[#F8FAFC] px-2 py-1 rounded-lg border border-[#F1F5F9]">This month</span>
+        </div>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {[
+            { label: "Sessions", value: sessionCount ?? 0, color: "text-[#0F172A]" },
+            { label: "Questions", value: questionCount ?? 0, color: "text-[#0F172A]" },
+            { label: "Avg Score", value: "—", color: "text-[#0F172A]" },
+            { label: "Status", value: "Active", color: "text-[#7C3AED]" },
+          ].map((s) => (
+            <div key={s.label}>
+              <p className={`text-2xl font-extrabold font-syne ${s.color}`}>{s.value}</p>
+              <p className="text-[#94A3B8] text-xs mt-0.5">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Quick actions ─────────────────────────────────────────────────── */}
+      <div className="bg-white rounded-2xl p-5 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm font-bold text-[#0F172A] font-syne">Quick Actions</span>
+          <ArrowUpRight size={14} className="text-[#94A3B8]" />
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <Link
+            href="/interview"
+            className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] text-white hover:opacity-90 transition-opacity group"
+          >
+            <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+              <ClipboardList size={16} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold text-sm font-syne">Start Interview</p>
+              <p className="text-blue-200 text-xs truncate">Run a candidate session</p>
+            </div>
+            <ArrowRight size={14} className="shrink-0 group-hover:translate-x-1 transition-transform" />
+          </Link>
+
+          <Link
+            href="/interview/admin"
+            className="flex items-center gap-3 p-4 rounded-xl bg-[#F8FAFC] border border-[#F1F5F9] text-[#0F172A] hover:border-[#7C3AED]/30 transition-colors group"
+          >
+            <div className="w-9 h-9 rounded-xl bg-[#F3F0FF] flex items-center justify-center shrink-0">
+              <Settings size={16} className="text-[#7C3AED]" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="font-bold text-sm font-syne">Question Builder</p>
+              <p className="text-[#94A3B8] text-xs truncate">Manage your questions</p>
+            </div>
+            <ArrowRight size={14} className="shrink-0 text-[#94A3B8] group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </div>
+
+      {/* ── Recent activity placeholder ───────────────────────────────────── */}
+      <div className="bg-white rounded-2xl p-5 border border-[#F1F5F9] shadow-sm">
+        <div className="flex items-center justify-between mb-4">
+          <span className="text-sm font-bold text-[#0F172A] font-syne">Recent Sessions</span>
+          <ArrowUpRight size={14} className="text-[#94A3B8]" />
+        </div>
+        {(sessionCount ?? 0) === 0 ? (
+          <div className="flex flex-col items-center justify-center py-8 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-[#F3F0FF] flex items-center justify-center mb-3">
+              <ClipboardList size={20} className="text-[#7C3AED]" />
+            </div>
+            <p className="text-[#0F172A] font-semibold text-sm mb-1">No sessions yet</p>
+            <p className="text-[#94A3B8] text-xs mb-4">Start your first interview to see results here</p>
             <Link
               href="/interview"
-              className="bg-[#2563EB] text-white rounded-2xl p-6 hover:bg-[#1d53d4] transition-all shadow-[0_4px_20px_rgba(37,99,235,0.3)] group"
+              className="flex items-center gap-1.5 px-4 py-2 bg-[#7C3AED] text-white rounded-xl text-xs font-semibold hover:bg-[#6D28D9] transition-colors"
             >
-              <ClipboardList size={24} className="mb-4 opacity-80" />
-              <h2 className="font-bold text-lg mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>
-                Start Interview
-              </h2>
-              <p className="text-blue-200 text-sm mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Run a candidate through the text-based interview flow
-              </p>
-              <div className="flex items-center gap-1 text-sm font-semibold" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Begin <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-
-            <Link
-              href="/interview/admin"
-              className="bg-white text-[#0F2B5B] rounded-2xl p-6 hover:shadow-md border border-[#E8EDF5] transition-all group"
-            >
-              <Settings size={24} className="mb-4 text-[#64748B]" />
-              <h2 className="font-bold text-lg mb-1" style={{ fontFamily: "'Syne', sans-serif" }}>
-                Question Builder
-              </h2>
-              <p className="text-[#64748B] text-sm mb-4" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Add, edit, and reorder interview questions and scoring criteria
-              </p>
-              <div className="flex items-center gap-1 text-sm font-semibold text-[#2563EB]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-                Open Builder <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-              </div>
+              Start Interview <ArrowRight size={12} />
             </Link>
           </div>
-
-          {/* Stats */}
-          <div className="grid sm:grid-cols-3 gap-4">
+        ) : (
+          <div className="space-y-2">
             {[
-              { label: "Total Sessions", value: sessionCount ?? 0 },
-              { label: "Custom Questions", value: questionCount ?? 0 },
-              { label: "Account", value: "Active" },
-            ].map((stat, i) => (
-              <div key={i} className="bg-white rounded-xl p-5 border border-[#E8EDF5] shadow-sm">
-                <div
-                  className="text-2xl font-extrabold text-[#0F2B5B] mb-1"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                >
-                  {stat.value}
+              { id: "M-3201", label: "Session", status: "Completed", color: "bg-green-100 text-green-700" },
+              { id: "P-1587", label: "Session", status: "In Progress", color: "bg-blue-100 text-blue-700" },
+            ].map((row) => (
+              <div key={row.id} className="flex items-center justify-between py-2.5 border-b border-[#F8FAFC] last:border-0">
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-[#F3F0FF] flex items-center justify-center">
+                    <CheckCircle2 size={13} className="text-[#7C3AED]" />
+                  </div>
+                  <div>
+                    <p className="text-[#0F172A] text-xs font-semibold">{row.id}</p>
+                    <p className="text-[#94A3B8] text-[10px]">{row.label}</p>
+                  </div>
                 </div>
-                <div
-                  className="text-[#64748B] text-sm"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  {stat.label}
-                </div>
+                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${row.color}`}>{row.status}</span>
               </div>
             ))}
           </div>
+        )}
+      </div>
 
-          {/* User info */}
-          <section className="bg-white rounded-xl p-6 border border-[#E8EDF5] shadow-sm">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-[#EEF4FF] flex items-center justify-center">
-                <UserCircle size={28} className="text-[#2563EB]" />
-              </div>
-              <div>
-                <h2
-                  className="font-bold text-[#0F2B5B]"
-                  style={{ fontFamily: "'Syne', sans-serif" }}
-                >
-                  Account
-                </h2>
-                <p
-                  className="text-sm text-[#64748B]"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
-                  {user.email}
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
-      </main>
-    </>
+    </AppShell>
   );
 }

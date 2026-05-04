@@ -18,6 +18,10 @@ const config = {
   		}
   	},
   	extend: {
+  		fontFamily: {
+  			syne: ['var(--font-syne)', 'Syne', 'sans-serif'],
+  			jakarta: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'sans-serif'],
+  		},
   		colors: {
   			border: 'hsl(var(--border))',
   			input: 'hsl(var(--input))',
