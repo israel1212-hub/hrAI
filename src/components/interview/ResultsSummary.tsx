@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { getPerformanceTier, getScoreColor } from "@/types/interview";
 import type { AnswerWithQuestion } from "@/types/interview";
 import { useState } from "react";
+import { Download, Copy, Check, ArrowLeft } from "lucide-react";
 
 interface ResultsSummaryProps {
   answers: AnswerWithQuestion[];
@@ -26,25 +27,19 @@ export default function ResultsSummary({
   const tier = getPerformanceTier(totalScore, maxScore);
   const percentage = maxScore > 0 ? Math.round((totalScore / maxScore) * 100) : 0;
 
-  const generateSummaryText = () => {
-    const lines = [
-      `Interview Summary — ${roleTitle}`,
-      `Candidate: ${candidateName}`,
-      `Date: ${new Date().toLocaleDateString()}`,
-      `Overall Score: ${totalScore}/${maxScore} (${percentage}%)`,
-      `Performance Tier: ${tier.label}`,
-      "",
-      "— Questions & Answers —",
-      "",
-      ...answers.map((a, i) => [
-        `Q${i + 1}. [${a.question.category}] ${a.question.question_text}`,
-        `Answer: ${a.answer_text}`,
-        `Score: ${a.score}/${a.max_score}`,
-        "",
-      ].join("\n")),
-    ];
-    return lines.join("\n");
-  };
+  const generateSummaryText = () => [
+    `Interview Summary — ${roleTitle}`,
+    `Candidate: ${candidateName}`,
+    `Date: ${new Date().toLocaleDateString()}`,
+    `Overall Score: ${totalScore}/${maxScore} (${percentage}%)`,
+    `Performance Tier: ${tier.label}`,
+    "",
+    "— Questions & Answers —",
+    "",
+    ...answers.map((a, i) =>
+      `Q${i + 1}. [${a.question.category}] ${a.question.question_text}\nAnswer: ${a.answer_text}\nScore: ${a.score}/${a.max_score}\n`
+    ),
+  ].join("\n");
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(generateSummaryText());
@@ -63,124 +58,85 @@ export default function ResultsSummary({
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F7FA] py-20 px-4">
-      {/* Background texture */}
-      <div
-        className="fixed inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(circle, #0F2B5B 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
+    <div className="min-h-screen bg-[#F8FAFC] py-16 px-4">
+      <div className="max-w-[640px] mx-auto">
 
-      <div className="max-w-[680px] mx-auto relative z-10">
-        {/* Score Header */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-10"
+          transition={{ duration: 0.35 }}
+          className="text-center mb-8"
         >
-          <div className="inline-flex items-center gap-2 bg-[#0F2B5B] text-[#F5F7FA] px-4 py-2 rounded-full text-sm font-semibold mb-6"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            Interview Complete
+          <div className="inline-flex items-center gap-2 bg-[#0F172A] text-white px-4 py-1.5 rounded-full text-xs font-semibold mb-5">
+            <Check size={12} /> Interview Complete
           </div>
-
-          <h1 className="text-[#0F2B5B] text-4xl font-extrabold mb-2"
-            style={{ fontFamily: "'Syne', sans-serif" }}>
-            {candidateName}
-          </h1>
-          <p className="text-[#64748B] text-[15px]" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            {roleTitle}
-          </p>
+          <h1 className="text-[#0F172A] text-3xl font-extrabold mb-1 font-syne">{candidateName}</h1>
+          <p className="text-[#64748B] text-sm">{roleTitle}</p>
         </motion.div>
 
-        {/* Score Card */}
+        {/* Score card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="bg-white rounded-2xl p-8 shadow-[0_4px_24px_rgba(15,43,91,0.08)] border border-[#E8EDF5] mb-8 text-center"
+          transition={{ duration: 0.35, delay: 0.08 }}
+          className="bg-white rounded-2xl p-7 shadow-sm border border-[#E8EDF5] mb-5 text-center"
         >
-          <div className="mb-2">
-            <span
-              className="text-7xl font-extrabold"
-              style={{ color: tier.color, fontFamily: "'Syne', sans-serif" }}
-            >
+          <div className="mb-1">
+            <span className="text-6xl font-extrabold font-syne" style={{ color: tier.color }}>
               {totalScore}
             </span>
-            <span className="text-3xl font-bold text-[#94A3B8]" style={{ fontFamily: "'Syne', sans-serif" }}>
-              /{maxScore}
-            </span>
+            <span className="text-2xl font-bold text-[#94A3B8] font-syne">/{maxScore}</span>
           </div>
 
-          {/* Progress arc */}
-          <div className="my-6">
-            <div className="w-full h-3 bg-[#E8EDF5] rounded-full overflow-hidden">
+          <div className="my-5">
+            <div className="w-full h-2.5 bg-[#E8EDF5] rounded-full overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
                 style={{ backgroundColor: tier.color }}
                 initial={{ width: 0 }}
                 animate={{ width: `${percentage}%` }}
-                transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.9, delay: 0.25, ease: "easeOut" }}
               />
             </div>
-            <p className="text-sm text-[#64748B] mt-2" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-              {percentage}% of maximum score
-            </p>
+            <p className="text-[#64748B] text-xs mt-2">{percentage}% of maximum score</p>
           </div>
 
           <div
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-white text-[15px] mb-3"
-            style={{ backgroundColor: tier.color, fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-bold text-white text-sm mb-2"
+            style={{ backgroundColor: tier.color }}
           >
             {tier.label}
           </div>
-          <p className="text-[#64748B] text-sm" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-            {tier.description}
-          </p>
+          <p className="text-[#64748B] text-sm">{tier.description}</p>
         </motion.div>
 
-        {/* Answers List */}
-        <div className="space-y-4 mb-8">
+        {/* Answers */}
+        <div className="space-y-3 mb-6">
           {answers.map((answer, index) => {
             const colorClass = getScoreColor(answer.score, answer.max_score);
             return (
               <motion.div
                 key={answer.id}
-                initial={{ opacity: 0, y: 16 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.15 + index * 0.06 }}
-                className="bg-white rounded-xl p-6 shadow-sm border border-[#E8EDF5] border-l-4 border-l-[#2563EB]"
+                transition={{ duration: 0.25, delay: 0.1 + index * 0.05 }}
+                className="bg-white rounded-xl p-5 shadow-sm border border-[#E8EDF5] border-l-4 border-l-[#2563EB]"
               >
-                <div className="flex items-start justify-between gap-4 mb-3">
+                <div className="flex items-start justify-between gap-3 mb-2.5">
                   <div>
-                    <span
-                      className="inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#EEF4FF] text-[#2563EB] uppercase tracking-wider mb-2"
-                      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                    >
+                    <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#EEF4FF] text-[#2563EB] uppercase tracking-wider mb-1.5">
                       {answer.question.category}
                     </span>
-                    <h3
-                      className="text-[#0F2B5B] font-bold text-[15px] leading-snug"
-                      style={{ fontFamily: "'Syne', sans-serif" }}
-                    >
+                    <h3 className="text-[#0F172A] font-bold text-sm leading-snug font-syne">
                       {answer.question.question_text}
                     </h3>
                   </div>
-                  <div
-                    className={`flex-shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full border text-sm font-bold ${colorClass}`}
-                  >
+                  <div className={`shrink-0 inline-flex items-center gap-0.5 px-2.5 py-1 rounded-full border text-sm font-bold ${colorClass}`}>
                     {answer.score}<span className="text-xs font-normal opacity-60">/{answer.max_score}</span>
                   </div>
                 </div>
-                <p
-                  className="text-[#64748B] text-sm leading-relaxed bg-[#F8FAFC] rounded-lg px-4 py-3 border border-[#E8EDF5]"
-                  style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
-                >
+                <p className="text-[#64748B] text-sm leading-relaxed bg-[#F8FAFC] rounded-lg px-3 py-2.5 border border-[#E8EDF5]">
                   {answer.answer_text}
                 </p>
               </motion.div>
@@ -188,53 +144,36 @@ export default function ResultsSummary({
           })}
         </div>
 
-        {/* Export Buttons */}
+        {/* Actions */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.5 }}
+          transition={{ duration: 0.25, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-3"
         >
           <button
+            type="button"
             onClick={handleCopy}
-            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl border border-[#2563EB] text-[#2563EB] font-semibold text-[15px] hover:bg-[#EEF4FF] transition-colors"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl border border-[#2563EB] text-[#2563EB] font-semibold text-sm hover:bg-[#EEF4FF] transition-colors"
           >
-            {copied ? (
-              <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Copied!
-              </>
-            ) : (
-              <>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
-                </svg>
-                Copy Summary
-              </>
-            )}
+            {copied ? <><Check size={15} /> Copied!</> : <><Copy size={15} /> Copy Summary</>}
           </button>
           <button
+            type="button"
             onClick={handleDownload}
-            className="flex-1 flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#2563EB] text-white font-semibold text-[15px] hover:bg-[#1d53d4] shadow-[0_4px_14px_rgba(37,99,235,0.3)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)] transition-all"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-[#2563EB] text-white font-semibold text-sm hover:bg-[#1d53d4] shadow-[0_4px_14px_rgba(37,99,235,0.3)] transition-all"
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-            </svg>
-            Download Report
+            <Download size={15} /> Download Report
           </button>
         </motion.div>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-6">
           <button
+            type="button"
             onClick={onNewInterview}
-            className="text-[#64748B] text-sm hover:text-[#0F2B5B] transition-colors"
-            style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
+            className="inline-flex items-center gap-1.5 text-[#64748B] text-sm hover:text-[#0F172A] transition-colors"
           >
-            ← Start New Interview
+            <ArrowLeft size={14} /> Start New Interview
           </button>
         </div>
       </div>
