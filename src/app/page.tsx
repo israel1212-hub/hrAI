@@ -34,32 +34,42 @@ export default function Home() {
               </div>
             </div>
 
-            {/* RIGHT — Cards */}
-            <div className="grid grid-cols-2 gap-4 h-[480px]">
+            {/* RIGHT — Abstract image + floating stat cards */}
+            <div className="relative h-[480px] hidden lg:block">
 
-              {/* Stat 1 — top left */}
-              <div className="bg-white rounded-3xl p-6 border border-[#F1F5F9] shadow-sm flex flex-col justify-center">
-                <p className="text-[#0F172A] text-4xl font-black tracking-tight font-jakarta">12k+</p>
-                <p className="text-[#94A3B8] text-sm mt-1">Candidates screened</p>
+              {/* Abstract flowing light image */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                <img
+                  src="https://raw.githubusercontent.com/tailark/assets/refs/heads/main/clouds_blcfda.jpg"
+                  alt=""
+                  className="w-full h-full object-cover"
+                  style={{ filter: "hue-rotate(200deg) saturate(1.4) brightness(0.85)" }}
+                />
+                {/* Subtle white fade on left edge to blend with white bg */}
+                <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
               </div>
 
-              {/* Stat 2 — top right */}
-              <div className="bg-white rounded-3xl p-6 border border-[#F1F5F9] shadow-sm flex flex-col justify-between">
-                <div>
-                  <p className="text-[#0F172A] text-4xl font-black tracking-tight font-jakarta">94%</p>
-                  <p className="text-[#94A3B8] text-sm mt-1">Scoring accuracy</p>
-                </div>
-                <div className="flex items-center mt-4">
+              {/* Stat card 1 — top left, floating */}
+              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-white/60 shadow-lg w-44">
+                <p className="text-[#0F172A] text-3xl font-black tracking-tight font-jakarta">12k+</p>
+                <p className="text-[#94A3B8] text-xs mt-1">Candidates screened</p>
+              </div>
+
+              {/* Stat card 2 — bottom right, floating */}
+              <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-white/60 shadow-lg w-48">
+                <p className="text-[#0F172A] text-3xl font-black tracking-tight font-jakarta">94%</p>
+                <p className="text-[#94A3B8] text-xs mt-1">Scoring accuracy</p>
+                <div className="flex items-center mt-3">
                   {["A","B","C","D","E"].map((l, i) => (
                     <div
                       key={l}
-                      className="w-7 h-7 rounded-full border-2 border-white flex items-center justify-center text-white text-[9px] font-bold"
-                      style={{ marginLeft: i === 0 ? 0 : -8, zIndex: 5 - i, backgroundColor: ["#7C3AED","#4F6EF7","#2563EB","#7C3AED","#A78BFA"][i] }}
+                      className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-bold"
+                      style={{ marginLeft: i === 0 ? 0 : -6, zIndex: 5 - i, backgroundColor: ["#7C3AED","#4F6EF7","#2563EB","#7C3AED","#A78BFA"][i] }}
                     >
                       {l}
                     </div>
                   ))}
-                  <span className="text-[#64748B] text-[10px] ml-2">+80k users</span>
+                  <span className="text-[#64748B] text-[9px] ml-1.5">+80k users</span>
                 </div>
               </div>
 
