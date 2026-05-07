@@ -40,8 +40,8 @@ export default function Home() {
               {/* Abstract flowing light image */}
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80"
-                  alt="Professional hiring interview"
+                  src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=900&q=80"
+                  alt="Abstract AI neural pattern"
                   className="w-full h-full object-cover"
                 />
                 {/* Subtle white fade on left edge to blend with white bg */}
