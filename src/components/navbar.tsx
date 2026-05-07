@@ -11,12 +11,12 @@ export default async function Navbar() {
       <div className="max-w-[900px] mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-xl bg-[#2563EB] flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          <div className="w-8 h-8 rounded-xl bg-[#7C3AED] flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
             </svg>
           </div>
-          <span className="text-white font-bold text-lg font-syne">HireMind AI</span>
+          <span className="text-white font-black text-lg font-jakarta tracking-tight">HireMind AI</span>
         </Link>
 
         {/* Nav links */}

@@ -59,11 +59,9 @@ export default function AppShell({
         <header className="flex items-center justify-between px-5 py-3 border-b border-[#F1F5F9] shrink-0">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-xl bg-[#0F172A] flex items-center justify-center">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
+            <div className="w-8 h-8 rounded-xl bg-[#7C3AED] flex items-center justify-center">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="white">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
               </svg>
             </div>
             <span className="text-[#0F172A] font-black text-sm font-jakarta tracking-tight">HireMind AI</span>
