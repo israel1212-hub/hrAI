@@ -25,8 +25,8 @@ export default function MarketingNav() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-white/70 backdrop-blur-3xl border-b border-white/50 shadow-sm"
-            : "bg-white/70 backdrop-blur-3xl border-b border-white/50"
+            ? "bg-white/70 backdrop-blur-3xl border-b border-[#F1F5F9]/80 shadow-sm"
+            : "bg-white/70 backdrop-blur-3xl border-b border-[#F1F5F9]/80"
         }`}
       >
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
@@ -40,7 +40,7 @@ export default function MarketingNav() {
                 <path d="M2 12l10 5 10-5"/>
               </svg>
             </div>
-            <span className="font-black text-sm font-jakarta text-white tracking-tight">
+            <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">
               HireMind AI
             </span>
           </Link>
@@ -51,7 +51,7 @@ export default function MarketingNav() {
               <Link
                 key={l.label}
                 href={l.href}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                className="px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
               >
                 {l.label}
               </Link>
@@ -62,7 +62,7 @@ export default function MarketingNav() {
           <div className="hidden md:flex items-center gap-2 shrink-0">
             <Link
               href="/sign-in"
-              className="px-4 py-2 rounded-lg text-sm font-medium text-white/70 hover:text-white transition-colors"
+              className="px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:text-[#0F172A] transition-colors"
             >
               Sign In
             </Link>
@@ -76,6 +76,7 @@ export default function MarketingNav() {
 
           {/* Mobile menu button */}
           <button
+            type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             className="md:hidden p-2 rounded-lg text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
