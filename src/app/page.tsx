@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Brain, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import MarketingNav from "@/components/marketing-nav";
 import Footer from "@/components/footer";
 
@@ -41,40 +41,14 @@ export default function Home() {
 
             {/* RIGHT — Cards */}
             <div className="grid grid-cols-2 gap-4 h-[480px]">
-              {/* Tall left card */}
-              <div className="row-span-2 bg-[#F3F0FF] rounded-3xl border border-[#EDE9FE] flex items-center justify-center p-6">
-                <div className="w-full max-w-[180px] bg-white rounded-2xl shadow-lg border border-[#F1F5F9] p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
-                      <Brain size={13} className="text-white" />
-                    </div>
-                    <span className="text-[#0F172A] text-xs font-bold">Interview</span>
-                  </div>
-                  <div className="space-y-2 mb-4">
-                    <div className="h-2 bg-[#F1F5F9] rounded-full w-full" />
-                    <div className="h-2 bg-[#F1F5F9] rounded-full w-4/5" />
-                    <div className="h-2 bg-[#F1F5F9] rounded-full w-3/5" />
-                  </div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-[#94A3B8] text-[10px]">Score</span>
-                    <span className="text-[#7C3AED] text-base font-extrabold">87/100</span>
-                  </div>
-                  <div className="h-1.5 bg-[#F1F5F9] rounded-full overflow-hidden mb-4">
-                    <div className="h-full w-[87%] bg-gradient-to-r from-[#7C3AED] to-[#4F6EF7] rounded-full" />
-                  </div>
-                  <div className="w-full py-2 bg-[#7C3AED] rounded-xl text-center">
-                    <span className="text-white text-[10px] font-bold tracking-wide">✓ HIRE</span>
-                  </div>
-                </div>
-              </div>
 
-              {/* Stat 1 */}
+              {/* Stat 1 — top left */}
               <div className="bg-white rounded-3xl p-6 border border-[#F1F5F9] shadow-sm flex flex-col justify-center">
                 <p className="text-[#0F172A] text-4xl font-black tracking-tight font-jakarta">12k+</p>
                 <p className="text-[#94A3B8] text-sm mt-1">Candidates screened</p>
               </div>
 
-              {/* Stat 2 */}
+              {/* Stat 2 — top right */}
               <div className="bg-white rounded-3xl p-6 border border-[#F1F5F9] shadow-sm flex flex-col justify-between">
                 <div>
                   <p className="text-[#0F172A] text-4xl font-black tracking-tight font-jakarta">94%</p>
@@ -93,6 +67,7 @@ export default function Home() {
                   <span className="text-[#64748B] text-[10px] ml-2">+80k users</span>
                 </div>
               </div>
+
             </div>
 
           </div>
