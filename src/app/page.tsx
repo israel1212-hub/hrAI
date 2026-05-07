@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Brain, Zap } from "lucide-react";
 import MarketingNav from "@/components/marketing-nav";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -97,6 +98,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }
