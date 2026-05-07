@@ -19,10 +19,6 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-black/70" />
 
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 max-w-[800px] mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 border border-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white mb-8">
-            <Zap size={11} className="text-yellow-400" />
-            AI-Powered Hiring Platform · Free to start
-          </div>
           <h1 className="text-white text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6 font-syne tracking-tight">
             Your AI Hiring Partner,{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] to-[#60A5FA]">
