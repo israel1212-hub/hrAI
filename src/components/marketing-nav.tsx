@@ -31,32 +31,33 @@ export default function MarketingNav() {
       >
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-8 h-8 rounded-xl bg-[#0F172A] flex items-center justify-center">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                <path d="M2 17l10 5 10-5"/>
-                <path d="M2 12l10 5 10-5"/>
-              </svg>
-            </div>
-            <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">
-              HireMind AI
-            </span>
-          </Link>
+          {/* Logo + nav links on the left */}
+          <div className="flex items-center gap-6 shrink-0">
+            <Link href="/" className="flex items-center gap-2 shrink-0">
+              <div className="w-8 h-8 rounded-xl bg-[#0F172A] flex items-center justify-center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                  <path d="M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">
+                HireMind AI
+              </span>
+            </Link>
 
-          {/* Center nav links */}
-          <nav className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((l) => (
-              <Link
-                key={l.label}
-                href={l.href}
-                className="px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
+            <nav className="hidden md:flex items-center gap-1">
+              {NAV_LINKS.map((l) => (
+                <Link
+                  key={l.label}
+                  href={l.href}
+                  className="px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+          </div>
 
           {/* Right side */}
           <div className="hidden md:flex items-center gap-2 shrink-0">
