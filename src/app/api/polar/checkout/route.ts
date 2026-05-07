@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Switch between sandbox and production via NEXT_PUBLIC_POLAR_MODE env var
-// sandbox = fake payments (test cards work, no real money)
-// production = real payments
-
 const isSandbox = process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox";
 
 const accessToken = isSandbox
@@ -11,21 +7,20 @@ const accessToken = isSandbox
   : process.env.POLAR_ACCESS_TOKEN;
 
 export async function GET(request: NextRequest) {
-  // Use request origin so it works on any domain (production, preview, local)
-  const origin = request.headers.get("origin") ||
-    request.headers.get("referer")?.split("/").slice(0, 3).join("/") ||
-    process.env.NEXT_PUBLIC_APP_URL ||
-    "https://hr-ai-delta.vercel.app";
-
   if (!accessToken) {
     return NextResponse.json({ error: "Polar is not configured" }, { status: 503 });
   }
+
+  // Build success URL from the incoming request host — works on any domain
+  const host = request.headers.get("host") || "hr-ai-delta.vercel.app";
+  const protocol = host.includes("localhost") ? "http" : "https";
+  const successUrl = `${protocol}://${host}/payment/success`;
 
   try {
     const { Checkout } = await import("@polar-sh/nextjs");
     const handler = Checkout({
       accessToken,
-      successUrl: `${origin}/payment/success`,
+      successUrl,
       server: isSandbox ? "sandbox" : "production",
     });
     return handler(request);
