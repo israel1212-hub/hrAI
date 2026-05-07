@@ -25,8 +25,8 @@ export default function MarketingNav() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[#1a0a2e]/80 backdrop-blur-xl border-b border-purple-900/30 shadow-sm"
-            : "bg-[#1a0a2e]/60 backdrop-blur-md border-b border-purple-900/20"
+            ? "bg-white/70 backdrop-blur-3xl border-b border-white/50 shadow-sm"
+            : "bg-white/70 backdrop-blur-3xl border-b border-white/50"
         }`}
       >
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
