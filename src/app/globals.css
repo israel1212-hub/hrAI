@@ -110,3 +110,8 @@
     @apply focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB];
   }
 }
+
+/* Hero background image */
+.hero-bg {
+  background-image: url('https://raw.githubusercontent.com/tailark/assets/refs/heads/main/clouds_blcfda.jpg');
+}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import {
   ArrowRight, Brain, ClipboardList, BarChart3,
   CheckCircle, Shield, Zap, Crown, Lock,
-  Users, Star, TrendingUp, MessageSquare,
+  Users, Star, MessageSquare, Apple, Smartphone,
 } from "lucide-react";
 import Footer from "@/components/footer";
 import MarketingNav from "@/components/marketing-nav";
@@ -12,140 +12,93 @@ export default function Home() {
     <div className="bg-white overflow-x-hidden">
       <MarketingNav />
 
-      {/* ── HERO (hero-section-4 style) ──────────────────────────────────── */}
-      <section className="relative bg-[#FAFAFA] border-b border-[#F1F5F9] overflow-hidden">
-        {/* Subtle grid background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-40" />
+      {/* ── HERO (hero-section-2 style) ──────────────────────────────────── */}
+      <section className="relative min-h-[92vh] flex flex-col items-center justify-center overflow-hidden">
 
-        <div className="relative z-10 max-w-[1100px] mx-auto px-6 pt-20 pb-0 text-center">
+        {/* Background image — clouds/landscape */}
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat hero-bg" />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+
+        {/* Nav is above, content below */}
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-20 max-w-[800px] mx-auto">
+
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white border border-[#E2E8F0] rounded-full text-xs font-semibold text-[#7C3AED] mb-6 shadow-sm">
-            <Zap size={11} className="text-yellow-500" />
-            HireMind AI raises $2M seed round
-            <span className="text-[#94A3B8] font-normal">· Read →</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/10 border border-white/20 backdrop-blur-sm rounded-full text-xs font-semibold text-white mb-8">
+            <Zap size={11} className="text-yellow-400" />
+            AI-Powered Hiring Platform · Free to start
           </div>
 
           {/* Headline */}
-          <h1 className="text-[#0F172A] text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6 font-syne tracking-tight max-w-[800px] mx-auto">
-            Transform Your Hiring with{" "}
-            <span className="text-[#7C3AED]">AI Interviews</span>
+          <h1 className="text-white text-5xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] mb-6 font-syne tracking-tight">
+            Your AI Hiring Partner,{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A78BFA] to-[#60A5FA]">
+              Always On
+            </span>
           </h1>
 
-          {/* Subtext */}
-          <p className="text-[#64748B] text-lg sm:text-xl leading-relaxed mb-8 max-w-[560px] mx-auto">
-            Efficiently screen candidates with AI-generated questions, automatic scoring, and clear hire/reject decisions.
+          {/* Subtitle */}
+          <p className="text-white/75 text-lg sm:text-xl leading-relaxed mb-10 max-w-[520px]">
+            Generate interview questions, score candidates automatically, and make confident hiring decisions — all in one place.
           </p>
 
-          {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-14">
+          {/* CTA Buttons — styled like app store buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-12">
             <Link
               href="/sign-up"
-              className="flex items-center gap-2 px-6 py-3 bg-[#7C3AED] text-white rounded-lg font-semibold text-sm hover:bg-[#6D28D9] shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all"
+              className="flex items-center gap-2.5 px-6 py-3.5 bg-white text-[#0F172A] rounded-xl font-semibold text-sm hover:bg-white/90 transition-all shadow-lg"
             >
-              Get Started Free <ArrowRight size={15} />
+              <Brain size={16} className="text-[#7C3AED]" />
+              Start Hiring Free
             </Link>
             <Link
-              href="#how-it-works"
-              className="flex items-center gap-2 px-6 py-3 bg-white border border-[#E2E8F0] text-[#0F172A] rounded-lg font-semibold text-sm hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all shadow-sm"
+              href="/sign-in"
+              className="flex items-center gap-2.5 px-6 py-3.5 bg-white/10 border border-white/30 backdrop-blur-sm text-white rounded-xl font-semibold text-sm hover:bg-white/20 transition-all"
             >
-              See how it works
+              <Smartphone size={16} />
+              Sign In
             </Link>
           </div>
 
-          {/* Dashboard mockup */}
-          <div className="relative mx-auto max-w-[900px]">
-            {/* Glow */}
-            <div className="absolute -inset-4 bg-gradient-to-t from-[#7C3AED]/10 to-transparent rounded-3xl blur-2xl" />
-            <div className="relative bg-white rounded-2xl border border-[#E2E8F0] shadow-[0_24px_80px_rgba(0,0,0,0.12)] overflow-hidden">
-              {/* Mock top bar */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-[#F1F5F9] bg-[#FAFAFA]">
-                <div className="w-3 h-3 rounded-full bg-red-400" />
-                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                <div className="w-3 h-3 rounded-full bg-green-400" />
-                <div className="flex-1 mx-4 h-6 bg-[#F1F5F9] rounded-md flex items-center px-3">
-                  <span className="text-[#94A3B8] text-[10px]">app.hiremind.ai/dashboard</span>
-                </div>
+          {/* Award badge */}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-2.5">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={12} className="text-yellow-400 fill-yellow-400" />
+                ))}
               </div>
-
-              {/* Mock dashboard content */}
-              <div className="p-5 bg-[#F8FAFC]">
-                <div className="grid grid-cols-4 gap-3 mb-4">
-                  {[
-                    { label: "Sessions", value: "248", color: "text-[#7C3AED]" },
-                    { label: "Avg Score", value: "87%", color: "text-green-600" },
-                    { label: "Hired", value: "42", color: "text-[#2563EB]" },
-                    { label: "Time Saved", value: "320h", color: "text-orange-500" },
-                  ].map((s) => (
-                    <div key={s.label} className="bg-white rounded-xl p-3 border border-[#F1F5F9] shadow-sm">
-                      <p className={`text-xl font-extrabold font-syne ${s.color}`}>{s.value}</p>
-                      <p className="text-[#94A3B8] text-[10px] mt-0.5">{s.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="grid grid-cols-3 gap-3">
-                  {/* Candidate card */}
-                  <div className="col-span-2 bg-white rounded-xl border border-[#F1F5F9] shadow-sm p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-bold text-[#0F172A]">Recent Interviews</span>
-                      <span className="text-[10px] text-[#94A3B8]">Today</span>
-                    </div>
-                    {[
-                      { name: "Alice M.", role: "Frontend Dev", score: 92, verdict: "Hire", color: "bg-green-100 text-green-700" },
-                      { name: "Bob K.", role: "Product Manager", score: 74, verdict: "Maybe", color: "bg-yellow-100 text-yellow-700" },
-                      { name: "Carol T.", role: "Data Analyst", score: 88, verdict: "Hire", color: "bg-green-100 text-green-700" },
-                    ].map((c) => (
-                      <div key={c.name} className="flex items-center justify-between py-2 border-b border-[#F8FAFC] last:border-0">
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] flex items-center justify-center text-white text-[9px] font-bold">
-                            {c.name[0]}
-                          </div>
-                          <div>
-                            <p className="text-[#0F172A] text-[11px] font-semibold">{c.name}</p>
-                            <p className="text-[#94A3B8] text-[9px]">{c.role}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-[#0F172A] text-[11px] font-bold">{c.score}/100</span>
-                          <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${c.color}`}>{c.verdict}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* AI insights */}
-                  <div className="bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] rounded-xl p-4 text-white">
-                    <div className="flex items-center gap-1.5 mb-3">
-                      <Brain size={13} className="text-yellow-300" />
-                      <span className="text-[11px] font-bold">AI Insights</span>
-                    </div>
-                    <p className="text-white/80 text-[10px] leading-relaxed mb-3">
-                      Top candidates this week scored 23% higher than average. Frontend roles are most competitive.
-                    </p>
-                    <div className="bg-white/15 rounded-lg p-2">
-                      <p className="text-white text-[10px] font-semibold">Recommendation</p>
-                      <p className="text-white/70 text-[9px] mt-0.5">Schedule final interviews for Alice M. and Carol T.</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="text-left">
+                <p className="text-white text-xs font-bold">Best AI Hiring Tool</p>
+                <p className="text-white/60 text-[10px]">Product Hunt · 2025</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 bg-white/10 border border-white/20 backdrop-blur-sm rounded-2xl px-4 py-2.5">
+              <Users size={14} className="text-white/70" />
+              <div className="text-left">
+                <p className="text-white text-xs font-bold">12,400+ Screened</p>
+                <p className="text-white/60 text-[10px]">Candidates this month</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Trusted by strip */}
-        <div className="relative z-10 border-t border-[#F1F5F9] bg-white mt-0 py-5">
-          <div className="max-w-[1100px] mx-auto px-6">
-            <p className="text-center text-[#94A3B8] text-xs mb-4 uppercase tracking-wider font-medium">
-              Trusted by hiring teams at
-            </p>
-            <div className="flex items-center justify-center gap-10 flex-wrap">
-              {["Stripe", "Vercel", "Linear", "Notion", "Figma", "Loom"].map((b) => (
-                <span key={b} className="text-[#CBD5E1] text-sm font-bold hover:text-[#94A3B8] transition-colors">
-                  {b}
-                </span>
-              ))}
-            </div>
+        {/* Bottom fade */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
+      </section>
+
+      {/* ── TRUSTED BY ───────────────────────────────────────────────────── */}
+      <section className="py-10 bg-white border-b border-[#F1F5F9]">
+        <div className="max-w-[1100px] mx-auto px-6">
+          <p className="text-center text-[#94A3B8] text-xs mb-5 uppercase tracking-wider font-medium">
+            Trusted by hiring teams at
+          </p>
+          <div className="flex items-center justify-center gap-10 flex-wrap">
+            {["Stripe", "Vercel", "Linear", "Notion", "Figma", "Loom"].map((b) => (
+              <span key={b} className="text-[#CBD5E1] text-sm font-bold hover:text-[#94A3B8] transition-colors cursor-default">
+                {b}
+              </span>
+            ))}
           </div>
         </div>
       </section>
