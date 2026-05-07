@@ -40,8 +40,8 @@ export default function Home() {
               {/* Abstract flowing light image */}
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=900&q=80"
-                  alt=""
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80"
+                  alt="Professional hiring interview"
                   className="w-full h-full object-cover"
                 />
                 {/* Subtle white fade on left edge to blend with white bg */}
