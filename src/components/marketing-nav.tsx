@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Brain, Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const NAV_LINKS = [
   { label: "Features", href: "#features" },
@@ -33,10 +33,14 @@ export default function MarketingNav() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
-              <Brain size={14} className="text-white" />
+            <div className="w-8 h-8 rounded-xl bg-[#0F172A] flex items-center justify-center">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
             </div>
-            <span className="font-bold text-sm font-syne text-[#0F172A]">
+            <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">
               HireMind AI
             </span>
           </Link>
