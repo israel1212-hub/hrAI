@@ -26,7 +26,7 @@ export default function MarketingNav() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/80 backdrop-blur-xl border-b border-[#F1F5F9] shadow-sm"
-            : "bg-transparent border-b border-transparent"
+            : "bg-white/95 backdrop-blur-sm border-b border-[#F1F5F9]"
         }`}
       >
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
@@ -36,7 +36,7 @@ export default function MarketingNav() {
             <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
               <Brain size={14} className="text-white" />
             </div>
-            <span className={`font-bold text-sm font-syne transition-colors ${scrolled ? "text-[#0F172A]" : "text-white"}`}>
+            <span className="font-bold text-sm font-syne text-[#0F172A]">
               HireMind AI
             </span>
           </Link>
@@ -47,11 +47,7 @@ export default function MarketingNav() {
               <Link
                 key={l.label}
                 href={l.href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  scrolled
-                    ? "text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC]"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
+                className="px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
               >
                 {l.label}
               </Link>
@@ -62,21 +58,13 @@ export default function MarketingNav() {
           <div className="hidden md:flex items-center gap-2 shrink-0">
             <Link
               href="/sign-in"
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-[#64748B] hover:text-[#0F172A]"
-                  : "text-white/80 hover:text-white"
-              }`}
+              className="px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:text-[#0F172A] transition-colors"
             >
               Sign In
             </Link>
             <Link
               href="/sign-up"
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
-                scrolled
-                  ? "bg-[#7C3AED] text-white hover:bg-[#6D28D9] shadow-sm"
-                  : "bg-white text-[#0F172A] hover:bg-white/90"
-              }`}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-[#0F172A] text-white hover:bg-[#1E293B] transition-all shadow-sm"
             >
               Get Started <ArrowUpRight size={13} />
             </Link>
@@ -86,9 +74,7 @@ export default function MarketingNav() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
-            className={`md:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? "text-[#0F172A] hover:bg-[#F8FAFC]" : "text-white hover:bg-white/10"
-            }`}
+            className="md:hidden p-2 rounded-lg text-[#0F172A] hover:bg-[#F8FAFC] transition-colors"
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
