@@ -20,8 +20,7 @@ export async function POST(request: NextRequest) {
     const admin = createAdminClient();
 
     const { data: profile } = await admin.from("users").select("plan, full_name").eq("user_id", user.id).single();
-    if (profile?.plan === "premium")
-      return NextResponse.json({ error: "Already on premium plan" }, { status: 400 });
+    // Allow re-subscribing even if already premium (handles sandbox retests)
 
     const amount = SUBSCRIPTION_PRICES[billingCycle];
     const txRef = generateTxRef("SUB");
