@@ -1,79 +1,133 @@
+"use client";
+
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Brain, Menu, X, ArrowUpRight } from "lucide-react";
 
-// Try to get user — never crash if Supabase is unavailable
-async function getUser() {
-  try {
-    const { createClient } = await import("../../supabase/server");
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    return user;
-  } catch {
-    return null;
-  }
-}
+const NAV_LINKS = [
+  { label: "Features", href: "#features" },
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Pricing", href: "/payment" },
+];
 
-export default async function MarketingNav() {
-  const user = await getUser();
+export default function MarketingNav() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <nav className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-[1200px] mx-auto px-6 py-3.5 flex items-center justify-between">
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/90 backdrop-blur-md border-b border-[#F1F5F9] shadow-sm"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between gap-8">
 
-        {/* Logo + Nav links */}
-        <div className="flex items-center gap-10">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-[#2563EB] flex items-center justify-center">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-2 shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
+              <Brain size={14} className="text-white" />
             </div>
-            <span className="text-white font-bold text-sm font-syne">HireMind AI</span>
+            <span className={`font-bold text-sm font-syne transition-colors ${scrolled ? "text-[#0F172A]" : "text-white"}`}>
+              HireMind AI
+            </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-7">
-            <Link href="#features" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
-              Features
+          {/* Center nav links */}
+          <nav className="hidden md:flex items-center gap-1">
+            {NAV_LINKS.map((l) => (
+              <Link
+                key={l.label}
+                href={l.href}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  scrolled
+                    ? "text-[#64748B] hover:text-[#0F172A] hover:bg-[#F8FAFC]"
+                    : "text-white/80 hover:text-white hover:bg-white/10"
+                }`}
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right side */}
+          <div className="hidden md:flex items-center gap-2 shrink-0">
+            <Link
+              href="/sign-in"
+              className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                scrolled
+                  ? "text-[#64748B] hover:text-[#0F172A]"
+                  : "text-white/80 hover:text-white"
+              }`}
+            >
+              Sign In
             </Link>
-            <Link href="#how-it-works" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
-              How it works
-            </Link>
-            <Link href="/payment" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
-              Pricing
+            <Link
+              href="/sign-up"
+              className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                scrolled
+                  ? "bg-[#7C3AED] text-white hover:bg-[#6D28D9] shadow-sm"
+                  : "bg-white text-[#0F172A] hover:bg-white/90"
+              }`}
+            >
+              Get Started <ArrowUpRight size={13} />
             </Link>
           </div>
-        </div>
 
-        {/* Right side */}
-        <div className="flex items-center gap-4">
-          {user ? (
-            <>
-              <Link href="/dashboard" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
-                Dashboard
-              </Link>
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              scrolled ? "text-[#0F172A] hover:bg-[#F8FAFC]" : "text-white hover:bg-white/10"
+            }`}
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile menu */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 bg-white pt-16">
+          <div className="px-6 py-6 flex flex-col gap-2">
+            {NAV_LINKS.map((l) => (
               <Link
-                href="/dashboard"
-                className="flex items-center gap-1.5 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-all"
+                key={l.label}
+                href={l.href}
+                onClick={() => setMobileOpen(false)}
+                className="px-4 py-3 rounded-xl text-[#0F172A] font-medium hover:bg-[#F8FAFC] transition-colors"
               >
-                Go to App <ArrowUpRight size={14} />
+                {l.label}
               </Link>
-            </>
-          ) : (
-            <>
-              <Link href="/sign-in" className="px-4 py-2 border border-white/30 text-white rounded-full text-sm font-semibold hover:bg-white/10 transition-all">
-                Log in
+            ))}
+            <div className="border-t border-[#F1F5F9] mt-4 pt-4 flex flex-col gap-2">
+              <Link
+                href="/sign-in"
+                onClick={() => setMobileOpen(false)}
+                className="px-4 py-3 rounded-xl text-[#64748B] font-medium hover:bg-[#F8FAFC] transition-colors"
+              >
+                Sign In
               </Link>
               <Link
                 href="/sign-up"
-                className="flex items-center gap-1.5 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-all"
+                onClick={() => setMobileOpen(false)}
+                className="px-4 py-3 rounded-xl bg-[#7C3AED] text-white font-semibold text-center hover:bg-[#6D28D9] transition-colors"
               >
-                Sign Up <ArrowUpRight size={14} />
+                Get Started Free
               </Link>
-            </>
-          )}
+            </div>
+          </div>
         </div>
-
-      </div>
-    </nav>
+      )}
+    </>
   );
 }
