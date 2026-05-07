@@ -11,14 +11,7 @@ export default function Footer() {
           {/* Logo + tagline */}
           <div className="flex flex-col items-center md:items-start gap-2">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-[#0F172A] flex items-center justify-center">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                  <path d="M2 17l10 5 10-5"/>
-                  <path d="M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">HireMind AI</span>
+              <span className="font-black text-lg font-jakarta text-[#0F172A] tracking-tight">HireMind AI</span>
             </Link>
             <p className="text-[#0F172A] text-xs">Hiring platform for modern teams</p>
           </div>
