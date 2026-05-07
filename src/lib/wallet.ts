@@ -108,25 +108,30 @@ export async function getWalletData() {
 
 /** Check if subscription is expired and downgrade if needed */
 export async function enforceSubscriptionExpiry(userId: string) {
-  const admin = createAdminClient();
+  try {
+    const admin = createAdminClient();
 
-  const { data: profile } = await admin
-    .from("users")
-    .select("plan, plan_expires_at")
-    .eq("user_id", userId)
-    .single();
-
-  if (!profile) return;
-
-  if (
-    profile.plan === "premium" &&
-    profile.plan_expires_at &&
-    new Date(profile.plan_expires_at) < new Date()
-  ) {
-    await admin
+    const { data: profile } = await admin
       .from("users")
-      .update({ plan: "free", plan_expires_at: null })
-      .eq("user_id", userId);
+      .select("plan, plan_expires_at")
+      .eq("user_id", userId)
+      .single();
+
+    if (!profile) return;
+
+    if (
+      profile.plan === "premium" &&
+      profile.plan_expires_at &&
+      new Date(profile.plan_expires_at) < new Date()
+    ) {
+      await admin
+        .from("users")
+        .update({ plan: "free", plan_expires_at: null })
+        .eq("user_id", userId);
+    }
+  } catch (err: any) {
+    // Never crash the page — just log
+    console.error("[enforceSubscriptionExpiry] Error:", err.message);
   }
 }
 
