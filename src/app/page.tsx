@@ -14,7 +14,7 @@ export default function Home() {
       <MarketingNav />
 
       {/* ── HERO (Beyond UI layout) ──────────────────────────────────────── */}
-      <section className="relative bg-[#F8FAFC] pt-28 pb-0 overflow-hidden">
+      <section className="relative bg-white pt-28 pb-0 overflow-hidden">
         <div className="max-w-[1200px] mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh] pb-16">
 
@@ -58,8 +58,7 @@ export default function Home() {
             <div className="relative grid grid-cols-2 gap-4 h-[480px]">
 
               {/* Main image card — tall, left column */}
-              <div className="row-span-2 bg-white rounded-3xl overflow-hidden shadow-sm border border-[#F1F5F9] relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#7C3AED]/10 to-[#4F6EF7]/10" />
+              <div className="row-span-2 bg-[#F3F0FF] rounded-3xl overflow-hidden shadow-sm border border-[#EDE9FE] relative">
                 <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
                   {/* Mock phone/dashboard visual */}
                   <div className="w-full max-w-[160px] bg-white rounded-2xl shadow-xl border border-[#F1F5F9] p-4">
