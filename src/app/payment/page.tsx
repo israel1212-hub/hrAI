@@ -9,6 +9,8 @@ import {
 import AppShell from "@/components/app-shell";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 const FREE_FEATURES = [
   "View wallet balance",
   "Receive money",
