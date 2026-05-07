@@ -25,7 +25,7 @@ export default function Home() {
                 Generate interview questions, score candidates automatically, and make confident hiring decisions — all in one place.
               </p>
               <div className="flex items-center gap-3 flex-wrap">
-                <Link href="/sign-up" className="px-6 py-3 bg-[#0F172A] text-white rounded-xl font-semibold text-sm hover:bg-[#1E293B] transition-all shadow-sm">
+                <Link href="/sign-up" className="px-6 py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-all shadow-sm">
                   Get Started
                 </Link>
                 <Link href="/sign-in" className="px-6 py-3 bg-white border border-[#E2E8F0] text-[#0F172A] rounded-xl font-semibold text-sm hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all shadow-sm">

@@ -68,7 +68,7 @@ export default function MarketingNav() {
             </Link>
             <Link
               href="/sign-up"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-[#0F172A] text-white hover:bg-[#1E293B] transition-all shadow-sm"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold bg-[#7C3AED] text-white hover:bg-[#6D28D9] transition-all shadow-sm"
             >
               Get Started <ArrowUpRight size={13} />
             </Link>
