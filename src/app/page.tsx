@@ -43,7 +43,7 @@ export default function Home() {
                   src="https://raw.githubusercontent.com/tailark/assets/refs/heads/main/clouds_blcfda.jpg"
                   alt=""
                   className="w-full h-full object-cover"
-                  style={{ filter: "hue-rotate(260deg) saturate(1.6) brightness(0.75)" }}
+                  style={{ filter: "hue-rotate(260deg) saturate(0.8) brightness(1.1)" }}
                 />
                 {/* Subtle white fade on left edge to blend with white bg */}
                 <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
