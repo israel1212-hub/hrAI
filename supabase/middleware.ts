@@ -42,17 +42,23 @@ export const updateSession = async (request: NextRequest) => {
     // https://supabase.com/docs/guides/auth/server-side/nextjs
     const { data: { user }, error } = await supabase.auth.getUser();
 
-    // protected routes — redirect to sign-in if not authenticated
-    if (request.nextUrl.pathname.startsWith("/dashboard") && error) {
+    const pathname = request.nextUrl.pathname;
+
+    // Protected routes — redirect to sign-in if not authenticated
+    const protectedRoutes = ["/dashboard", "/wallet", "/payment"];
+    const isProtectedPage = protectedRoutes.some((r) => pathname.startsWith(r));
+    // Also protect API routes (return 401 is handled in the route itself,
+    // but the session refresh here is what makes getUser() work)
+    if (isProtectedPage && error) {
       return NextResponse.redirect(new URL("/sign-in", request.url));
     }
 
-    // redirect authenticated users from auth pages to dashboard
+    // Redirect authenticated users away from auth pages
     if (
       !error &&
-      (request.nextUrl.pathname.startsWith("/sign-in") ||
-        request.nextUrl.pathname.startsWith("/sign-up") ||
-        request.nextUrl.pathname.startsWith("/forgot-password"))
+      (pathname.startsWith("/sign-in") ||
+        pathname.startsWith("/sign-up") ||
+        pathname.startsWith("/forgot-password"))
     ) {
       return NextResponse.redirect(new URL("/dashboard", request.url));
     }

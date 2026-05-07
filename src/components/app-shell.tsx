@@ -4,29 +4,30 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
-  ClipboardList,
-  Settings,
+  Wallet,
   CreditCard,
   LogOut,
-  ChevronDown,
   UserCircle,
+  ClipboardList,
+  Settings2,
 } from "lucide-react";
 import { createClient } from "../../supabase/client";
 
 const NAV = [
-  { href: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { href: "/interview", icon: ClipboardList, label: "Interviews" },
-  { href: "/interview/admin", icon: Settings, label: "Question Builder" },
-  { href: "/payment", icon: CreditCard, label: "Billing" },
+  { href: "/dashboard",      icon: LayoutDashboard, label: "Dashboard" },
+  { href: "/interview",      icon: ClipboardList,   label: "Interviews" },
+  { href: "/interview/admin",icon: Settings2,       label: "Questions" },
+  { href: "/wallet",         icon: Wallet,          label: "Wallet" },
+  { href: "/payment",        icon: CreditCard,      label: "Upgrade" },
 ];
 
-// Each tab maps to a route
 const TABS = [
-  { label: "Overview", href: "/dashboard" },
-  { label: "Sessions", href: "/interview" },
-  { label: "Questions", href: "/interview/admin" },
-  { label: "Billing", href: "/payment" },
-  { label: "Settings", href: "/dashboard/reset-password" },
+  { label: "Dashboard",  href: "/dashboard" },
+  { label: "Interviews", href: "/interview" },
+  { label: "Questions",  href: "/interview/admin" },
+  { label: "Wallet",     href: "/wallet" },
+  { label: "Upgrade",    href: "/payment" },
+  { label: "Settings",   href: "/dashboard/reset-password" },
 ];
 
 interface AppShellProps {

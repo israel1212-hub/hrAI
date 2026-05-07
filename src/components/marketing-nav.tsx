@@ -22,9 +22,6 @@ export default async function MarketingNav() {
           </Link>
 
           <div className="hidden md:flex items-center gap-7">
-            <Link href="#solutions" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
-              Solutions
-            </Link>
             <Link href="#features" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
               Features
             </Link>
@@ -34,7 +31,6 @@ export default async function MarketingNav() {
             <Link href="/payment" className="text-white/70 hover:text-white text-sm font-medium transition-colors">
               Pricing
             </Link>
-
           </div>
         </div>
 
@@ -46,10 +42,10 @@ export default async function MarketingNav() {
                 Dashboard
               </Link>
               <Link
-                href="/interview"
+                href="/dashboard"
                 className="flex items-center gap-1.5 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-all"
               >
-                Start Interview <ArrowUpRight size={14} />
+                Dashboard <ArrowUpRight size={14} />
               </Link>
             </>
           ) : (

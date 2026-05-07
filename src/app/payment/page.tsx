@@ -1,450 +1,267 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Check } from "lucide-react";
+import {
+  Crown, Check, Lock, Loader2,
+  Zap, Shield, ArrowLeft, Infinity,
+  CreditCard, Smartphone,
+} from "lucide-react";
 import AppShell from "@/components/app-shell";
 import Link from "next/link";
-import PayPalButton from "@/components/paypal-button";
-import ApplePayButton from "@/components/apple-pay-button";
-import GooglePayButton from "@/components/google-pay-button";
 
-function PaymentForm() {
-  const [billing, setBilling] = useState<"monthly" | "yearly">("yearly");
-  const [method, setMethod] = useState<"card" | "paypal" | "apple" | "google">("card");
-  const [cardNumber, setCardNumber] = useState("");
-  const [expiry, setExpiry] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [name, setName] = useState("");
-  const [address1, setAddress1] = useState("");
-  const [address2, setAddress2] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [promo, setPromo] = useState("");
-  const [showPromo, setShowPromo] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
+const FREE_FEATURES = [
+  "View wallet balance",
+  "Receive money",
+  "Send up to 5,000 RWF/day",
+  "Deposit up to 10,000 RWF",
+  "Max balance: 500,000 RWF",
+];
 
-  const monthlyPrice = 239;
-  const yearlyPrice = 189;
-  const price = billing === "yearly" ? yearlyPrice : monthlyPrice;
-  const total = billing === "yearly" ? yearlyPrice * 12 : monthlyPrice;
+const PREMIUM_FEATURES = [
+  { icon: <Infinity size={14} />, text: "Unlimited transfers" },
+  { icon: <Infinity size={14} />, text: "Unlimited withdrawals" },
+  { icon: <Zap size={14} />,      text: "No daily limits" },
+  { icon: <Shield size={14} />,   text: "Priority processing" },
+  { icon: <Crown size={14} />,    text: "High balance limit" },
+  { icon: <Check size={14} />,    text: "Everything in Free" },
+];
 
-  const handlePayPalSuccess = (details: any) => {
-    console.log("PayPal payment successful:", details);
-    setIsProcessing(false);
-    // Handle successful payment - redirect to success page or update user status
-    alert(`Payment successful! Thank you for your ${billing} HireMind AI subscription.`);
-  };
-
-  const handlePayPalError = (error: any) => {
-    console.error("PayPal payment error:", error);
-    setIsProcessing(false);
-    alert("PayPal payment failed. Please try again.");
-  };
-
-  const handleApplePaySuccess = (details: any) => {
-    console.log("Apple Pay payment successful:", details);
-    setIsProcessing(false);
-    alert(`Payment successful! Thank you for your ${billing} HireMind AI subscription.`);
-  };
-
-  const handleApplePayError = (error: any) => {
-    console.error("Apple Pay payment error:", error);
-    setIsProcessing(false);
-    alert(`Apple Pay payment failed: ${error}`);
-  };
-
-  const handleGooglePaySuccess = (details: any) => {
-    console.log("Google Pay payment successful:", details);
-    setIsProcessing(false);
-    alert(`Payment successful! Thank you for your ${billing} HireMind AI subscription.`);
-  };
-
-  const handleGooglePayError = (error: any) => {
-    console.error("Google Pay payment error:", error);
-    setIsProcessing(false);
-    alert(`Google Pay payment failed: ${error}`);
-  };
-
-  const formatCard = (val: string) => {
-    const digits = val.replace(/\D/g, "").slice(0, 16);
-    return digits.replace(/(.{4})/g, "$1 ").trim();
-  };
-
-  const formatExpiry = (val: string) => {
-    const digits = val.replace(/\D/g, "").slice(0, 4);
-    if (digits.length >= 3) return digits.slice(0, 2) + "/" + digits.slice(2);
-    return digits;
-  };
-
-  return (
-    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-120px)] rounded-xl lg:rounded-2xl overflow-hidden border border-[#F1F5F9] shadow-sm">
-
-      {/* ── LEFT PANEL ─────────────────────────────────────────────────────── */}
-      <div className="w-full lg:w-[380px] shrink-0 relative overflow-hidden flex flex-col p-4 sm:p-6 lg:p-8"
-        style={{ background: "linear-gradient(145deg, #9333EA 0%, #C026D3 40%, #F97316 100%)" }}>
-
-        {/* Wave lines decoration */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <svg viewBox="0 0 400 600" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
-            {[0,1,2,3,4,5,6,7,8].map((i) => (
-              <path key={i}
-                d={`M-50 ${100 + i * 60} Q 100 ${60 + i * 60} 200 ${100 + i * 60} T 450 ${100 + i * 60}`}
-                fill="none" stroke="white" strokeWidth="1.5" opacity={0.6 - i * 0.05}
-              />
-            ))}
-          </svg>
-        </div>
-
-        <div className="relative z-10 flex flex-col h-full">
-          {/* Back */}
-          <Link href="/dashboard" className="flex items-center gap-2 text-white/70 hover:text-white text-xs sm:text-sm mb-4 sm:mb-8 transition-colors w-fit">
-            <div className="w-6 sm:w-7 h-6 sm:h-7 rounded-full bg-white/20 flex items-center justify-center">
-              <ArrowLeft size={10} className="sm:size-[13px]" />
-            </div>
-            Upgrade your plan
-          </Link>
-
-          {/* Price */}
-          <div className="mb-4 sm:mb-6">
-            <p className="text-white text-2xl sm:text-4xl font-extrabold font-syne mb-1">
-              ${total.toLocaleString()}.00
-            </p>
-            <p className="text-white/70 text-xs sm:text-sm">
-              We will bill you ${price}.00 {billing === "yearly" ? "monthly" : "monthly"} + taxes, unless you cancel.
-            </p>
-          </div>
-
-          {/* Plan card */}
-          <div className="bg-white/10 backdrop-blur rounded-xl sm:rounded-2xl p-3 sm:p-4 mb-4 sm:mb-6 border border-white/20">
-            <div className="flex items-start gap-2 sm:gap-3">
-              <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-[#0F172A] flex items-center justify-center shrink-0">
-                <span className="text-white font-bold text-xs sm:text-sm font-syne">S</span>
-              </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-1">
-                  <p className="text-white font-bold text-xs sm:text-sm font-syne">Standard pro</p>
-                  <p className="text-white font-bold text-xs sm:text-sm">${price}.00</p>
-                </div>
-                <p className="text-white/60 text-[10px] sm:text-xs leading-relaxed">
-                  Up to 5 users in HireMind AI. Great for small teams, agencies and startups.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Promo code */}
-          {showPromo ? (
-            <div className="flex gap-2 mb-4 sm:mb-6">
-              <input
-                type="text"
-                value={promo}
-                onChange={(e) => setPromo(e.target.value)}
-                placeholder="Enter promo code"
-                className="flex-1 px-3 py-2 sm:py-2.5 rounded-lg sm:rounded-xl bg-white/20 border border-white/30 text-white placeholder:text-white/50 text-xs sm:text-sm focus:outline-none focus:border-white/60"
-              />
-              <button type="button" className="px-3 sm:px-4 py-2 sm:py-2.5 bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-semibold rounded-lg sm:rounded-xl transition-colors">
-                Apply
-              </button>
-            </div>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setShowPromo(true)}
-              className="w-full py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/20 hover:bg-white/30 text-white text-xs sm:text-sm font-semibold border border-white/20 transition-colors mb-4 sm:mb-6"
-            >
-              Add promo code
-            </button>
-          )}
-
-          {/* Totals */}
-          <div className="mt-auto space-y-2 pt-3 sm:pt-4 border-t border-white/20">
-            <div className="flex justify-between text-xs sm:text-sm">
-              <span className="text-white/70">Subtotal</span>
-              <span className="text-white font-semibold">${total.toLocaleString()}.00</span>
-            </div>
-            <div className="flex justify-between text-xs sm:text-sm">
-              <span className="text-white font-bold">Total due today</span>
-              <span className="text-white font-bold">${price}.00</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── RIGHT PANEL ────────────────────────────────────────────────────── */}
-      <div className="flex-1 bg-white p-4 sm:p-6 lg:p-8 overflow-y-auto">
-
-        {/* Billing frequency */}
-        <div className="mb-5 sm:mb-7">
-          <p className="text-[#0F172A] font-bold text-xs sm:text-sm mb-2 sm:mb-3">Billing frequency</p>
-          <div className="grid grid-cols-2 gap-3">
-            <button
-              type="button"
-              onClick={() => setBilling("monthly")}
-              className={`p-2.5 sm:p-4 rounded-lg sm:rounded-xl border-2 text-left transition-all text-xs sm:text-sm ${
-                billing === "monthly"
-                  ? "border-[#2563EB] bg-[#EEF4FF]"
-                  : "border-[#E8EDF5] hover:border-[#CBD5E1]"
-              }`}
-            >
-              <p className="text-[#64748B] text-[10px] sm:text-xs mb-1">Pay monthly</p>
-              <p className="text-[#0F172A] font-bold text-xs sm:text-sm">${monthlyPrice}/month</p>
-            </button>
-            <button
-              type="button"
-              onClick={() => setBilling("yearly")}
-              className={`p-2.5 sm:p-4 rounded-lg sm:rounded-xl border-2 text-left transition-all relative text-xs sm:text-sm ${
-                billing === "yearly"
-                  ? "border-[#2563EB] bg-[#EEF4FF]"
-                  : "border-[#E8EDF5] hover:border-[#CBD5E1]"
-              }`}
-            >
-              {billing === "yearly" && (
-                <Check size={10} className="sm:size-[14px] absolute top-2 sm:top-3 right-2 sm:right-3 text-[#2563EB]" />
-              )}
-              <p className="text-[#64748B] text-[10px] sm:text-xs mb-1">Pay yearly</p>
-              <div className="flex items-center gap-1 sm:gap-2">
-                <p className="text-[#0F172A] font-bold text-xs sm:text-sm">${yearlyPrice}/month</p>
-                <span className="px-1 sm:px-1.5 py-0.5 bg-green-500 text-white text-[8px] sm:text-[10px] font-bold rounded">Save 20%</span>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Payment method */}
-        <div className="mb-5 sm:mb-7">
-          <p className="text-[#0F172A] font-bold text-xs sm:text-sm mb-2 sm:mb-3">Payment method</p>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {[
-              { id: "card", label: "Credit or Debit card" },
-              { id: "paypal", label: "PayPal" },
-              { id: "apple", label: "Apple Pay" },
-              { id: "google", label: "G Pay" },
-            ].map((m) => (
-              <button
-                key={m.id}
-                type="button"
-                onClick={() => setMethod(m.id as typeof method)}
-                className={`px-2.5 sm:px-4 py-1.5 sm:py-2.5 rounded-lg sm:rounded-xl border text-xs sm:text-sm font-medium transition-all ${
-                  method === m.id
-                    ? "border-[#2563EB] bg-white text-[#2563EB] shadow-sm"
-                    : "border-[#E8EDF5] text-[#475569] hover:border-[#CBD5E1]"
-                }`}
-              >
-                {m.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Payment information */}
-        <div className="mb-7">
-          <p className="text-[#0F172A] font-bold text-sm mb-3">Payment information</p>
-
-          {method === "paypal" ? (
-            <div className="space-y-4">
-              <PayPalButton
-                amount={price}
-                billing={billing}
-                onSuccess={handlePayPalSuccess}
-                onError={handlePayPalError}
-              />
-            </div>
-          ) : method === "apple" ? (
-            <div className="space-y-4">
-              <ApplePayButton
-                amount={price}
-                onSuccess={handleApplePaySuccess}
-                onError={handleApplePayError}
-              />
-            </div>
-          ) : method === "google" ? (
-            <div className="space-y-4">
-              <GooglePayButton
-                amount={price}
-                onSuccess={handleGooglePaySuccess}
-                onError={handleGooglePayError}
-              />
-            </div>
-          ) : method === "card" ? (
-            <>
-              {/* Card brand icons */}
-              <div className="flex items-center gap-2 mb-4">
-                {/* Mastercard */}
-                <div className="flex">
-                  <div className="w-5 h-5 rounded-full bg-[#EB001B]" />
-                  <div className="w-5 h-5 rounded-full bg-[#F79E1B] -ml-2" />
-                </div>
-                {/* VISA */}
-                <div className="px-2 py-0.5 border border-[#E8EDF5] rounded text-[#1A1F71] font-extrabold text-xs italic">VISA</div>
-                {/* Amex */}
-                <div className="w-8 h-5 bg-[#2E77BC] rounded flex items-center justify-center">
-                  <span className="text-white text-[8px] font-bold">AMEX</span>
-                </div>
-                {/* JCB */}
-                <div className="w-8 h-5 bg-gradient-to-r from-[#003087] via-[#CC0000] to-[#009F6B] rounded flex items-center justify-center">
-                  <span className="text-white text-[8px] font-bold">JCB</span>
-                </div>
-                {/* Discover */}
-                <div className="px-2 py-0.5 border border-[#E8EDF5] rounded text-[#F76F20] font-bold text-[9px]">DISCOVER</div>
-                {/* Equity Bank of Rwanda */}
-                <div className="w-8 h-5 bg-gradient-to-r from-[#0066CC] to-[#00A3CC] rounded flex items-center justify-center">
-                  <span className="text-white text-[6px] font-bold">EQUITY</span>
-                </div>
-              </div>
-
-              <div className="text-center mb-4">
-                <p className="text-[#64748B] text-xs">
-                  We accept major credit cards including Equity Bank of Rwanda cards
-                </p>
-              </div>
-
-              <div className="space-y-3">
-                {/* Card number */}
-                <div>
-                  <label className="block text-[#475569] text-xs font-medium mb-1">Card number</label>
-                  <input
-                    type="text"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(formatCard(e.target.value))}
-                    placeholder="0000 0000 0000 0000"
-                    className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                    maxLength={19}
-                  />
-                </div>
-
-                {/* Expiry + CVC */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[#475569] text-xs font-medium mb-1">Expiry date</label>
-                    <input
-                      type="text"
-                      value={expiry}
-                      onChange={(e) => setExpiry(formatExpiry(e.target.value))}
-                      placeholder="MM/YY"
-                      className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                      maxLength={5}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[#475569] text-xs font-medium mb-1">CVC</label>
-                    <input
-                      type="text"
-                      value={cvc}
-                      onChange={(e) => setCvc(e.target.value.replace(/\D/g, "").slice(0, 4))}
-                      placeholder="3-digit code"
-                      className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                    />
-                  </div>
-                </div>
-
-                {/* Name on card */}
-                <div>
-                  <label className="block text-[#475569] text-xs font-medium mb-1">Name on card</label>
-                  <input
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="e.g Irakli Beridze"
-                    className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                  />
-                </div>
-
-                {/* Address */}
-                <div>
-                  <label className="block text-[#475569] text-xs font-medium mb-1">Address</label>
-                  <input
-                    type="text"
-                    value={address1}
-                    onChange={(e) => setAddress1(e.target.value)}
-                    placeholder="Street address or P.O box"
-                    className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1] mb-2"
-                  />
-                  <input
-                    type="text"
-                    value={address2}
-                    onChange={(e) => setAddress2(e.target.value)}
-                    placeholder="Apt., suite, unit, building (Optional)"
-                    className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                  />
-                </div>
-
-                {/* City + State */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-[#475569] text-xs font-medium mb-1">City</label>
-                    <input
-                      type="text"
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
-                      placeholder="City"
-                      className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[#475569] text-xs font-medium mb-1">State</label>
-                    <input
-                      type="text"
-                      value={state}
-                      onChange={(e) => setState(e.target.value)}
-                      placeholder="State, province, region"
-                      className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all placeholder:text-[#CBD5E1]"
-                    />
-                  </div>
-                </div>
-
-                {/* Country */}
-                <div>
-                  <label className="block text-[#475569] text-xs font-medium mb-1">Country</label>
-                  <select
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    aria-label="Country"
-                    className="w-full px-3 py-2.5 rounded-xl border border-[#E8EDF5] bg-white text-[#0F172A] text-sm focus:outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/10 transition-all appearance-none"
-                  >
-                    <option value="">Select country</option>
-                    <option value="us">United States</option>
-                    <option value="gb">United Kingdom</option>
-                    <option value="ca">Canada</option>
-                    <option value="au">Australia</option>
-                    <option value="de">Germany</option>
-                    <option value="fr">France</option>
-                    <option value="jp">Japan</option>
-                    <option value="in">India</option>
-                    <option value="br">Brazil</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-            </>
-          ) : (
-            <div className="text-center py-8">
-              <p className="text-[#64748B] text-sm">
-                {method === "apple" ? "Apple Pay" : "Google Pay"} integration coming soon.
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* Subscribe button */}
-        {method !== "paypal" && (
-          <button
-            type="button"
-            disabled={isProcessing}
-            className="w-full py-3.5 rounded-xl bg-[#2563EB] text-white font-bold text-sm hover:bg-[#1d53d4] shadow-[0_4px_14px_rgba(37,99,235,0.35)] active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isProcessing ? "Processing..." : "Subscribe"}
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
+// Prices shown in the UI (informational — actual charge is set in Polar)
+const PRICES = { monthly: 2000, yearly: 15000 };
 
 export default function PaymentPage() {
+  const [billing, setBilling]   = useState<"monthly" | "yearly">("monthly");
+  const [loading, setLoading]   = useState(false);
+  const [error, setError]       = useState("");
+
+  const price        = PRICES[billing];
+  const yearlySaving = PRICES.monthly * 12 - PRICES.yearly;
+
+  // Get the correct Polar product ID from env
+  const productId = billing === "monthly"
+    ? process.env.NEXT_PUBLIC_POLAR_MONTHLY_PRODUCT_ID
+    : process.env.NEXT_PUBLIC_POLAR_YEARLY_PRODUCT_ID;
+
+  async function handleUpgrade() {
+    setLoading(true);
+    setError("");
+    try {
+      window.location.href = `/api/polar/checkout?products=${productId}`;
+    } catch (err: any) {
+      setError(err.message || "Failed to start checkout.");
+      setLoading(false);
+    }
+  }
+
+  const productsConfigured =
+    productId && !productId.includes("your_");
+
   return (
     <AppShell>
-      <PaymentForm />
+      <div className="max-w-[820px] mx-auto w-full">
+
+        {/* Header */}
+        <div className="mb-6">
+          <Link
+            href="/dashboard"
+            className="flex items-center gap-1.5 text-[#64748B] text-xs hover:text-[#7C3AED] transition-colors mb-4"
+          >
+            <ArrowLeft size={13} /> Back to Dashboard
+          </Link>
+          <h1 className="text-2xl font-extrabold text-[#0F172A] font-syne">
+            Upgrade to Premium
+          </h1>
+          <p className="text-[#64748B] text-sm mt-1">
+            Remove all limits and unlock the full PayWave experience
+          </p>
+        </div>
+
+        {/* Billing toggle */}
+        <div className="flex items-center gap-2 bg-[#F8FAFC] rounded-xl p-1 mb-6 max-w-[280px]">
+          {(["monthly", "yearly"] as const).map((b) => (
+            <button
+              key={b}
+              onClick={() => setBilling(b)}
+              className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-all relative ${
+                billing === b
+                  ? "bg-white text-[#0F172A] shadow-sm"
+                  : "text-[#64748B] hover:text-[#0F172A]"
+              }`}
+            >
+              {b.charAt(0).toUpperCase() + b.slice(1)}
+              {b === "yearly" && (
+                <span className="absolute -top-2.5 -right-1 bg-green-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                  SAVE
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {/* Plans */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+
+          {/* Free */}
+          <div className="bg-white rounded-2xl p-6 border border-[#F1F5F9] shadow-sm">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-8 h-8 rounded-xl bg-[#F8FAFC] flex items-center justify-center">
+                <Lock size={15} className="text-[#64748B]" />
+              </div>
+              <span className="font-bold text-[#0F172A] font-syne">Free Plan</span>
+            </div>
+            <p className="text-3xl font-extrabold text-[#0F172A] font-syne mb-1">
+              0 <span className="text-base text-[#64748B]">RWF</span>
+            </p>
+            <p className="text-[#94A3B8] text-xs mb-5">Forever free</p>
+            <div className="space-y-2.5">
+              {FREE_FEATURES.map((f) => (
+                <div key={f} className="flex items-center gap-2 text-sm text-[#475569]">
+                  <Check size={13} className="text-green-500 shrink-0" /> {f}
+                </div>
+              ))}
+              {["Unlimited transfers", "Unlimited withdrawals"].map((f) => (
+                <div key={f} className="flex items-center gap-2 text-sm text-[#94A3B8]">
+                  <Lock size={13} className="text-[#CBD5E1] shrink-0" /> {f}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Premium */}
+          <div className="bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] rounded-2xl p-6 text-white relative overflow-hidden shadow-xl">
+            <div className="absolute top-0 right-0 w-32 h-32 rounded-full bg-white/10 -translate-y-1/2 translate-x-1/2" />
+            <div className="relative z-10">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Crown size={15} className="text-yellow-300" />
+                </div>
+                <span className="font-bold font-syne">Premium Plan</span>
+                <span className="ml-auto bg-yellow-400/20 border border-yellow-400/30 text-yellow-300 text-[9px] font-bold px-2 py-0.5 rounded-full">
+                  RECOMMENDED
+                </span>
+              </div>
+              <div className="flex items-baseline gap-1 mb-1">
+                <span className="text-3xl font-extrabold font-syne">
+                  {price.toLocaleString()}
+                </span>
+                <span className="text-white/60 text-sm">
+                  RWF/{billing === "monthly" ? "mo" : "yr"}
+                </span>
+              </div>
+              {billing === "yearly" ? (
+                <p className="text-yellow-300 text-xs mb-5">
+                  Save {yearlySaving.toLocaleString()} RWF vs monthly
+                </p>
+              ) : (
+                <p className="text-white/60 text-xs mb-5">Billed monthly</p>
+              )}
+              <div className="space-y-2.5">
+                {PREMIUM_FEATURES.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm text-white/90">
+                    <span className="text-yellow-300 shrink-0">{f.icon}</span>
+                    {f.text}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Checkout box */}
+        <div className="bg-white rounded-2xl p-6 border border-[#F1F5F9] shadow-sm">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="w-6 h-6 rounded-lg bg-[#F3F0FF] flex items-center justify-center">
+              {/* Polar logo mark */}
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" fill="#7C3AED" />
+                <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </div>
+            <h3 className="font-bold text-[#0F172A] font-syne">Pay with Polar</h3>
+          </div>
+          <p className="text-[#64748B] text-xs mb-5">
+            Secure checkout · Merchant of Record · Tax handled automatically
+          </p>
+
+          {/* Payment method icons */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {[
+              { icon: <CreditCard size={13} />, label: "Visa" },
+              { icon: <CreditCard size={13} />, label: "Mastercard" },
+              { icon: <Smartphone size={13} />, label: "Apple Pay" },
+              { icon: <Smartphone size={13} />, label: "Google Pay" },
+            ].map((m) => (
+              <div
+                key={m.label}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg text-xs text-[#64748B] font-medium"
+              >
+                {m.icon} {m.label}
+              </div>
+            ))}
+          </div>
+
+          {/* Setup notice if products not configured */}
+          {!productsConfigured && (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-4">
+              <p className="text-amber-800 text-xs font-semibold mb-2">
+                ⚙️ One-time setup needed
+              </p>
+              <ol className="text-amber-700 text-xs space-y-1 list-decimal list-inside">
+                <li>
+                  Go to{" "}
+                  <a
+                    href="https://polar.sh/dashboard/israel1212-hubs-org/products"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="underline font-semibold"
+                  >
+                    Polar → Products
+                  </a>{" "}
+                  and create two products:
+                </li>
+                <li>
+                  <strong>PayWave Premium Monthly</strong> — recurring monthly
+                </li>
+                <li>
+                  <strong>PayWave Premium Yearly</strong> — recurring yearly
+                </li>
+                <li>
+                  Copy each product ID and add to{" "}
+                  <code className="bg-amber-100 px-1 rounded">.env.local</code>:
+                </li>
+              </ol>
+              <pre className="mt-2 bg-amber-100 rounded-lg p-2 text-[10px] text-amber-900 overflow-x-auto">
+{`NEXT_PUBLIC_POLAR_MONTHLY_PRODUCT_ID=your_id
+NEXT_PUBLIC_POLAR_YEARLY_PRODUCT_ID=your_id`}
+              </pre>
+            </div>
+          )}
+
+          {error && (
+            <p className="text-red-500 text-xs bg-red-50 border border-red-200 rounded-xl p-3 mb-4">
+              {error}
+            </p>
+          )}
+
+          <button
+            onClick={handleUpgrade}
+            disabled={loading}
+            className="w-full py-4 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#4F6EF7] text-white font-bold text-sm hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(124,58,237,0.4)]"
+          >
+            {loading
+              ? <Loader2 size={18} className="animate-spin" />
+              : <Crown size={18} />}
+            {loading
+              ? "Redirecting to Polar…"
+              : `Upgrade Now — ${price.toLocaleString()} RWF/${billing === "monthly" ? "month" : "year"}`}
+          </button>
+
+          <p className="text-center text-[10px] text-[#94A3B8] mt-3">
+            Powered by Polar · Secure · Cancel anytime
+          </p>
+        </div>
+
+      </div>
     </AppShell>
   );
 }

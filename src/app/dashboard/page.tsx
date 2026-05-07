@@ -3,15 +3,18 @@ import { createClient } from "../../../supabase/server";
 import Link from "next/link";
 import AppShell from "@/components/app-shell";
 import {
-  ClipboardList,
-  Settings,
-  ArrowRight,
+  Wallet,
+  Send,
+  ArrowDownLeft,
   ArrowUpRight,
-  UserCircle,
+  Crown,
+  Lock,
+  TrendingUp,
   CheckCircle2,
   Clock,
-  TrendingUp,
+  XCircle,
 } from "lucide-react";
+import { enforceSubscriptionExpiry } from "@/lib/wallet";
 
 export default async function Dashboard() {
   const supabase = await createClient();
@@ -19,17 +22,49 @@ export default async function Dashboard() {
 
   if (!user) return redirect("/sign-in");
 
-  const { count: sessionCount } = await supabase
-    .from("interview_sessions")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", user.id);
+  // Enforce subscription expiry
+  await enforceSubscriptionExpiry(user.id);
 
-  const { count: questionCount } = await supabase
-    .from("interview_questions")
-    .select("*", { count: "exact", head: true })
-    .eq("user_id", user.id);
+  // Fetch wallet
+  const { data: wallet } = await supabase
+    .from("wallets")
+    .select("balance, currency")
+    .eq("user_id", user.id)
+    .single();
 
-  // Right panel content
+  // Fetch profile
+  const { data: profile } = await supabase
+    .from("users")
+    .select("plan, plan_expires_at, full_name")
+    .eq("user_id", user.id)
+    .single();
+
+  // Fetch recent transactions
+  const { data: transactions } = await supabase
+    .from("transactions")
+    .select("*")
+    .or(`user_id.eq.${user.id},recipient_id.eq.${user.id}`)
+    .order("created_at", { ascending: false })
+    .limit(5);
+
+  const balance = wallet?.balance || 0;
+  const plan = profile?.plan || "free";
+  const isPremium = plan === "premium";
+  const displayName = profile?.full_name || user.email?.split("@")[0] || "User";
+
+  const totalIn = (transactions || [])
+    .filter((t) => (t.type === "deposit" || t.type === "receive") && t.status === "success")
+    .reduce((s: number, t: any) => s + t.amount, 0);
+
+  const totalOut = (transactions || [])
+    .filter((t) => (t.type === "send" || t.type === "withdraw") && t.status === "success")
+    .reduce((s: number, t: any) => s + t.amount, 0);
+
+  function formatRWF(n: number) {
+    return new Intl.NumberFormat("en-RW", { minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(n);
+  }
+
+  // Right panel
   const rightPanel = (
     <>
       {/* Profile card */}
@@ -40,51 +75,52 @@ export default async function Dashboard() {
         </div>
         <div className="flex items-center gap-3 mb-4">
           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] flex items-center justify-center text-white font-bold text-sm">
-            {user.email?.[0].toUpperCase()}
+            {displayName[0].toUpperCase()}
           </div>
           <div>
-            <p className="text-[#0F172A] font-semibold text-xs truncate max-w-[130px]">{user.email}</p>
-            <p className="text-[#94A3B8] text-[10px]">Active account</p>
-          </div>
-        </div>
-        <div className="w-full h-1.5 bg-[#F1F5F9] rounded-full overflow-hidden mb-1">
-          <div className="h-full w-[65%] bg-gradient-to-r from-[#7C3AED] to-[#4F6EF7] rounded-full" />
-        </div>
-        <p className="text-[#94A3B8] text-[10px]">Plan usage 65%</p>
-      </div>
-
-      {/* Stats card */}
-      <div className="bg-white rounded-2xl p-4 border border-[#F1F5F9] shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-xs font-semibold text-[#0F172A]">Activity</span>
-          <ArrowUpRight size={13} className="text-[#94A3B8]" />
-        </div>
-        {/* Donut placeholder */}
-        <div className="flex items-center justify-center mb-4">
-          <div className="relative w-20 h-20">
-            <svg viewBox="0 0 36 36" className="w-20 h-20 -rotate-90">
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#F1F5F9" strokeWidth="3" />
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#7C3AED" strokeWidth="3"
-                strokeDasharray={`${(sessionCount ?? 0) > 0 ? 60 : 20} 100`} strokeLinecap="round" />
-              <circle cx="18" cy="18" r="15.9" fill="none" stroke="#4F6EF7" strokeWidth="3"
-                strokeDasharray="25 100" strokeDashoffset="-60" strokeLinecap="round" />
-            </svg>
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <span className="text-[#0F172A] font-extrabold text-lg font-syne">{sessionCount ?? 0}</span>
-              <span className="text-[#94A3B8] text-[9px]">total</span>
+            <p className="text-[#0F172A] font-semibold text-xs truncate max-w-[130px]">{displayName}</p>
+            <div className="flex items-center gap-1 mt-0.5">
+              {isPremium ? (
+                <span className="flex items-center gap-0.5 text-[9px] font-bold text-yellow-600 bg-yellow-50 px-1.5 py-0.5 rounded-full">
+                  <Crown size={8} /> PREMIUM
+                </span>
+              ) : (
+                <span className="flex items-center gap-0.5 text-[9px] font-semibold text-[#64748B] bg-[#F1F5F9] px-1.5 py-0.5 rounded-full">
+                  <Lock size={8} /> FREE
+                </span>
+              )}
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 text-center">
-          <div>
-            <p className="text-[#0F172A] font-bold text-sm font-syne">{questionCount ?? 0}</p>
-            <p className="text-[#94A3B8] text-[10px]">Questions</p>
-          </div>
-          <div>
-            <p className="text-[#0F172A] font-bold text-sm font-syne">{sessionCount ?? 0}</p>
-            <p className="text-[#94A3B8] text-[10px]">Sessions</p>
-          </div>
+        {!isPremium && (
+          <Link
+            href="/payment"
+            className="flex items-center justify-center gap-1 w-full py-2 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#4F6EF7] text-white text-[11px] font-bold hover:opacity-90 transition-opacity"
+          >
+            <Crown size={11} /> Upgrade to Premium
+          </Link>
+        )}
+        {isPremium && profile?.plan_expires_at && (
+          <p className="text-[#94A3B8] text-[10px]">
+            Expires {new Date(profile.plan_expires_at).toLocaleDateString()}
+          </p>
+        )}
+      </div>
+
+      {/* Balance card */}
+      <div className="bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] rounded-2xl p-4 text-white">
+        <div className="flex items-center gap-1.5 mb-2">
+          <Wallet size={13} className="text-white/70" />
+          <span className="text-white/70 text-[10px]">Wallet Balance</span>
         </div>
+        <p className="text-2xl font-extrabold font-syne">{formatRWF(balance)}</p>
+        <p className="text-white/60 text-[10px]">RWF</p>
+        <Link
+          href="/wallet"
+          className="mt-3 flex items-center justify-center gap-1 w-full py-2 rounded-xl bg-white/20 text-white text-[11px] font-semibold hover:bg-white/30 transition-colors"
+        >
+          Open Wallet <ArrowUpRight size={11} />
+        </Link>
       </div>
     </>
   );
@@ -100,10 +136,10 @@ export default async function Dashboard() {
         </div>
         <div className="grid grid-cols-2 gap-2 sm:gap-4">
           {[
-            { label: "Sessions", value: sessionCount ?? 0, color: "text-[#0F172A]" },
-            { label: "Questions", value: questionCount ?? 0, color: "text-[#0F172A]" },
-            { label: "Avg Score", value: "—", color: "text-[#0F172A]" },
-            { label: "Status", value: "Active", color: "text-[#7C3AED]" },
+            { label: "Balance", value: `${formatRWF(balance)} RWF`, color: "text-[#7C3AED]" },
+            { label: "Transactions", value: String((transactions || []).length), color: "text-[#0F172A]" },
+            { label: "Total In", value: `${formatRWF(totalIn)} RWF`, color: "text-green-600" },
+            { label: "Total Out", value: `${formatRWF(totalOut)} RWF`, color: "text-orange-500" },
           ].map((s) => (
             <div key={s.label}>
               <p className={`text-lg sm:text-2xl font-extrabold font-syne ${s.color}`}>{s.value}</p>
@@ -121,72 +157,85 @@ export default async function Dashboard() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
           <Link
-            href="/interview"
+            href="/wallet"
             className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] text-white hover:opacity-90 transition-opacity group"
           >
             <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-              <ClipboardList size={14} className="sm:size-[16px]" />
+              <Wallet size={14} className="sm:size-[16px]" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-xs sm:text-sm font-syne">Start Interview</p>
-              <p className="text-blue-200 text-[10px] sm:text-xs truncate">Run a candidate session</p>
+              <p className="font-bold text-xs sm:text-sm font-syne">My Wallet</p>
+              <p className="text-blue-200 text-[10px] sm:text-xs truncate">Send, receive & withdraw</p>
             </div>
-            <ArrowRight size={12} className="sm:size-[14px] shrink-0 group-hover:translate-x-1 transition-transform" />
+            <ArrowUpRight size={12} className="sm:size-[14px] shrink-0 group-hover:translate-x-1 transition-transform" />
           </Link>
 
           <Link
-            href="/interview/admin"
+            href="/payment"
             className="flex items-center gap-2 sm:gap-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-[#F8FAFC] border border-[#F1F5F9] text-[#0F172A] hover:border-[#7C3AED]/30 transition-colors group"
           >
-            <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-[#F3F0FF] flex items-center justify-center shrink-0">
-              <Settings size={14} className="sm:size-[16px] text-[#7C3AED]" />
+            <div className="w-8 sm:w-9 h-8 sm:h-9 rounded-lg sm:rounded-xl bg-yellow-50 flex items-center justify-center shrink-0">
+              <Crown size={14} className="sm:size-[16px] text-yellow-500" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-bold text-xs sm:text-sm font-syne">Question Builder</p>
-              <p className="text-[#94A3B8] text-[10px] sm:text-xs truncate">Manage your questions</p>
+              <p className="font-bold text-xs sm:text-sm font-syne">
+                {isPremium ? "Premium Active" : "Upgrade Plan"}
+              </p>
+              <p className="text-[#94A3B8] text-[10px] sm:text-xs truncate">
+                {isPremium ? "Unlimited access" : "Remove all limits"}
+              </p>
             </div>
-            <ArrowRight size={12} className="sm:size-[14px] shrink-0 text-[#94A3B8] group-hover:translate-x-1 transition-transform" />
+            <ArrowUpRight size={12} className="sm:size-[14px] shrink-0 text-[#94A3B8] group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </div>
 
-      {/* ── Recent activity placeholder ───────────────────────────────────── */}
+      {/* ── Recent Transactions ───────────────────────────────────────────── */}
       <div className="bg-white rounded-xl sm:rounded-2xl p-3 sm:p-5 border border-[#F1F5F9] shadow-sm">
         <div className="flex items-center justify-between mb-3 sm:mb-4">
-          <span className="text-xs sm:text-sm font-bold text-[#0F172A] font-syne">Recent Sessions</span>
-          <ArrowUpRight size={12} className="sm:size-[14px] text-[#94A3B8]" />
+          <span className="text-xs sm:text-sm font-bold text-[#0F172A] font-syne">Recent Transactions</span>
+          <Link href="/wallet" className="text-[10px] text-[#7C3AED] font-semibold hover:underline">View all</Link>
         </div>
-        {(sessionCount ?? 0) === 0 ? (
+        {(transactions || []).length === 0 ? (
           <div className="flex flex-col items-center justify-center py-6 sm:py-8 text-center">
             <div className="w-10 sm:w-12 h-10 sm:h-12 rounded-xl sm:rounded-2xl bg-[#F3F0FF] flex items-center justify-center mb-2 sm:mb-3">
-              <ClipboardList size={16} className="sm:size-[20px] text-[#7C3AED]" />
+              <Wallet size={16} className="sm:size-[20px] text-[#7C3AED]" />
             </div>
-            <p className="text-[#0F172A] font-semibold text-xs sm:text-sm mb-1">No sessions yet</p>
-            <p className="text-[#94A3B8] text-[10px] sm:text-xs mb-3 sm:mb-4">Start your first interview to see results here</p>
+            <p className="text-[#0F172A] font-semibold text-xs sm:text-sm mb-1">No transactions yet</p>
+            <p className="text-[#94A3B8] text-[10px] sm:text-xs mb-3 sm:mb-4">Deposit money to get started</p>
             <Link
-              href="/interview"
+              href="/wallet"
               className="flex items-center gap-1 sm:gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 bg-[#7C3AED] text-white rounded-lg sm:rounded-xl text-[10px] sm:text-xs font-semibold hover:bg-[#6D28D9] transition-colors"
             >
-              Start Interview <ArrowRight size={10} className="sm:size-[12px]" />
+              Open Wallet <ArrowUpRight size={10} className="sm:size-[12px]" />
             </Link>
           </div>
         ) : (
-          <div className="space-y-2">
-            {[
-              { id: "M-3201", label: "Session", status: "Completed", color: "bg-green-100 text-green-700" },
-              { id: "P-1587", label: "Session", status: "In Progress", color: "bg-blue-100 text-blue-700" },
-            ].map((row) => (
-              <div key={row.id} className="flex items-center justify-between py-2.5 border-b border-[#F8FAFC] last:border-0">
+          <div className="space-y-1">
+            {(transactions || []).map((tx: any) => (
+              <div key={tx.id} className="flex items-center justify-between py-2.5 border-b border-[#F8FAFC] last:border-0">
                 <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-lg bg-[#F3F0FF] flex items-center justify-center">
-                    <CheckCircle2 size={13} className="text-[#7C3AED]" />
+                  <div className="w-7 h-7 rounded-lg bg-[#F8FAFC] flex items-center justify-center">
+                    {(tx.type === "deposit" || tx.type === "receive") && <ArrowDownLeft size={13} className="text-green-600" />}
+                    {(tx.type === "send" || tx.type === "withdraw") && <Send size={13} className="text-[#7C3AED]" />}
+                    {tx.type === "subscription" && <Crown size={13} className="text-yellow-500" />}
                   </div>
                   <div>
-                    <p className="text-[#0F172A] text-xs font-semibold">{row.id}</p>
-                    <p className="text-[#94A3B8] text-[10px]">{row.label}</p>
+                    <p className="text-[#0F172A] text-xs font-semibold capitalize">{tx.type}</p>
+                    <p className="text-[#94A3B8] text-[10px] truncate max-w-[140px]">{tx.description || tx.reference}</p>
                   </div>
                 </div>
-                <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${row.color}`}>{row.status}</span>
+                <div className="text-right">
+                  <p className={`text-xs font-bold ${(tx.type === "deposit" || tx.type === "receive") ? "text-green-600" : "text-[#0F172A]"}`}>
+                    {(tx.type === "deposit" || tx.type === "receive") ? "+" : "-"}{formatRWF(tx.amount)} RWF
+                  </p>
+                  <div className="flex items-center gap-1 justify-end">
+                    {tx.status === "success" && <CheckCircle2 size={9} className="text-green-500" />}
+                    {tx.status === "pending" && <Clock size={9} className="text-amber-500" />}
+                    {tx.status === "failed" && <XCircle size={9} className="text-red-500" />}
+                    <span className="text-[9px] text-[#94A3B8] capitalize">{tx.status}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

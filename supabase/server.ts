@@ -16,9 +16,17 @@ export const createClient = async () => {
           }));
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => {
-            cookieStore.set(name, value, options);
-          });
+          // In API Route handlers the cookie store is read-only after the
+          // response has started streaming. Wrapping in try/catch prevents
+          // the "cookies() was called after response" error while still
+          // allowing getUser() to read the existing session cookie.
+          try {
+            cookiesToSet.forEach(({ name, value, options }) => {
+              cookieStore.set(name, value, options);
+            });
+          } catch {
+            // Silently ignore — the session is still readable via getAll()
+          }
         },
       },
     }

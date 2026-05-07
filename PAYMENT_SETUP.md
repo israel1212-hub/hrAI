@@ -7,6 +7,11 @@ This guide explains how to configure the payment methods in HireMind AI.
 Update your `.env.local` file with the following variables:
 
 ```env
+# Stripe Configuration
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key_here
+STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
+STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret_here
+
 # PayPal Configuration
 NEXT_PUBLIC_PAYPAL_CLIENT_ID=your_paypal_client_id_here
 
@@ -19,6 +24,28 @@ NEXT_PUBLIC_GOOGLE_PAY_MERCHANT_ID=your_google_pay_merchant_id_here
 NEXT_PUBLIC_GOOGLE_PAY_GATEWAY=your_payment_gateway_name
 NEXT_PUBLIC_GOOGLE_PAY_GATEWAY_MERCHANT_ID=your_gateway_merchant_id
 ```
+
+## Stripe Setup
+
+1. Go to [Stripe Dashboard](https://dashboard.stripe.com/)
+2. Create a new account or log in to existing account
+3. Get your API keys from the Developers > API keys section
+4. Copy the Publishable key to `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+5. Copy the Secret key to `STRIPE_SECRET_KEY`
+
+### Creating Products and Prices
+
+1. In Stripe Dashboard, go to Products
+2. Create a product for your subscription (e.g., "HireMind AI Pro")
+3. Add pricing for monthly and yearly plans
+4. Copy the Price IDs to use in your API calls
+
+### Webhook Setup
+
+1. In Stripe Dashboard, go to Developers > Webhooks
+2. Add endpoint: `https://yourdomain.com/api/webhooks`
+3. Select events: `invoice.payment_succeeded`, `invoice.payment_failed`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`
+4. Copy the webhook secret to `STRIPE_WEBHOOK_SECRET`
 
 ## PayPal Setup
 
@@ -48,6 +75,33 @@ NEXT_PUBLIC_GOOGLE_PAY_GATEWAY_MERCHANT_ID=your_gateway_merchant_id
 The card payment form accepts:
 - Visa
 - Mastercard
+- American Express
+- JCB
+- Discover
+
+Cards are processed securely through Stripe.
+
+## Testing
+
+For testing Stripe payments, use these test card numbers:
+- Success: 4242 4242 4242 4242
+- Declined: 4000 0000 0000 0002
+- Requires authentication: 4000 0025 0000 3155
+
+## Webhook Testing
+
+Use Stripe CLI to test webhooks locally:
+
+```bash
+stripe listen --forward-to localhost:3000/api/webhooks
+```
+
+## Security Notes
+
+- Never commit real API keys to version control
+- Use test keys for development
+- Rotate keys regularly in production
+- Monitor webhook endpoints for failures
 - American Express
 - JCB
 - Discover

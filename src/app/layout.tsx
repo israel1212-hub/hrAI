@@ -17,8 +17,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "HireMind AI — Text-Based Interview Platform",
-  description: "Structured text interviews with automatic scoring for modern hiring teams.",
+  title: "HireMind AI — AI-Powered Hiring Platform",
+  description: "AI-driven interviews, candidate scoring, and hiring decisions. Free and Premium plans available.",
 };
 
 export default function RootLayout({
