@@ -20,7 +20,7 @@ export default function Footer() {
               </div>
               <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">HireMind AI</span>
             </Link>
-            <p className="text-[#94A3B8] text-xs">Hiring platform for modern teams</p>
+            <p className="text-[#0F172A] text-xs">Hiring platform for modern teams</p>
           </div>
 
           {/* Nav links */}
@@ -34,7 +34,7 @@ export default function Footer() {
               { label: "Privacy", href: "#" },
               { label: "Licence", href: "#" },
             ].map((l) => (
-              <Link key={l.label} href={l.href} className="text-[#64748B] hover:text-[#0F172A] text-sm transition-colors">
+              <Link key={l.label} href={l.href} className="text-[#0F172A] hover:text-[#7C3AED] text-sm transition-colors font-medium">
                 {l.label}
               </Link>
             ))}
@@ -62,8 +62,8 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-8 pt-6 border-t border-[#F1F5F9] flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[#94A3B8] text-xs">© {currentYear} HireMind AI — All Systems Normal</p>
-          <p className="text-[#94A3B8] text-xs">All rights reserved.</p>
+          <p className="text-[#0F172A] text-xs font-medium">© {currentYear} HireMind AI — All Systems Normal</p>
+          <p className="text-[#0F172A] text-xs font-medium">All rights reserved.</p>
         </div>
       </div>
     </footer>
