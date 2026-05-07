@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { signUpAction } from "@/app/actions";
 import { UrlProvider } from "@/components/url-provider";
-import { Brain, ClipboardList, BarChart3, Zap, CheckCircle } from "lucide-react";
+import { Brain, ClipboardList, BarChart3, CheckCircle } from "lucide-react";
 
 export default async function Signup(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
@@ -100,10 +100,6 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
 
         {/* Features list */}
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5 mb-8">
-            <Zap size={12} className="text-yellow-300" />
-            <span className="text-white text-xs font-semibold">Free to get started</span>
-          </div>
           <h2 className="text-white text-3xl font-extrabold font-syne mb-3 leading-tight">
             Hire the right people,<br />faster than ever
           </h2>
