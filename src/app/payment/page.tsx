@@ -39,10 +39,15 @@ export default function PaymentPage() {
   const price        = PRICES[billing];
   const yearlySaving = PRICES.monthly * 12 - PRICES.yearly;
 
-  // Get the correct Polar product ID from env
+  // Use sandbox or production product IDs based on mode
+  const isSandbox = process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox";
   const productId = billing === "monthly"
-    ? process.env.NEXT_PUBLIC_POLAR_MONTHLY_PRODUCT_ID
-    : process.env.NEXT_PUBLIC_POLAR_YEARLY_PRODUCT_ID;
+    ? (isSandbox
+        ? process.env.NEXT_PUBLIC_POLAR_SANDBOX_MONTHLY_PRODUCT_ID
+        : process.env.NEXT_PUBLIC_POLAR_MONTHLY_PRODUCT_ID)
+    : (isSandbox
+        ? process.env.NEXT_PUBLIC_POLAR_SANDBOX_YEARLY_PRODUCT_ID
+        : process.env.NEXT_PUBLIC_POLAR_YEARLY_PRODUCT_ID);
 
   async function handleUpgrade() {
     setLoading(true);
@@ -55,8 +60,7 @@ export default function PaymentPage() {
     }
   }
 
-  const productsConfigured =
-    productId && !productId.includes("your_");
+  const productsConfigured = !!productId;
 
   return (
     <AppShell>
@@ -70,11 +74,21 @@ export default function PaymentPage() {
           >
             <ArrowLeft size={13} /> Back to Dashboard
           </Link>
-          <h1 className="text-2xl font-extrabold text-[#0F172A] font-syne">
-            Upgrade to Premium
-          </h1>
+          <div className="flex items-center gap-3 mb-1">
+            <h1 className="text-2xl font-extrabold text-[#0F172A] font-syne">
+              Upgrade to Premium
+            </h1>
+            {process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox" && (
+              <span className="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded-full border border-amber-200">
+                🧪 TEST MODE
+              </span>
+            )}
+          </div>
           <p className="text-[#64748B] text-sm mt-1">
-            Remove all limits and unlock the full PayWave experience
+            Remove all limits and unlock the full HireMind AI experience
+            {process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox" && (
+              <span className="text-amber-600 font-medium"> · No real money charged</span>
+            )}
           </p>
         </div>
 
