@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
 import MarketingNav from "@/components/marketing-nav";
 import Footer from "@/components/footer";
 
@@ -15,10 +14,6 @@ export default function Home() {
 
             {/* LEFT */}
             <div className="flex flex-col justify-center">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-[#E2E8F0] rounded-full text-xs text-[#64748B] mb-8 w-fit shadow-sm">
-                <Zap size={10} className="text-[#7C3AED]" />
-                2.0 version is here
-              </div>
               <h1 className="text-[#0F172A] text-5xl sm:text-6xl font-black leading-[1.08] mb-6 tracking-tight font-jakarta">
                 Welcome to the{" "}
                 <span className="italic font-light text-[#7C3AED]">AI</span>
