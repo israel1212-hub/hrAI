@@ -5,9 +5,9 @@ import { useEffect, useState } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Features", href: "#features" },
-  { label: "How it works", href: "#how-it-works" },
   { label: "Pricing", href: "/payment" },
+  { label: "Sign Up", href: "/sign-up" },
+  { label: "Dashboard", href: "/dashboard" },
 ];
 
 export default function MarketingNav() {
