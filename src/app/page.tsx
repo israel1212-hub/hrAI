@@ -40,7 +40,7 @@ export default function Home() {
               {/* Abstract flowing light image */}
               <div className="absolute inset-0 rounded-3xl overflow-hidden">
                 <img
-                  src="https://raw.githubusercontent.com/tailark/assets/refs/heads/main/clouds_blcfda.jpg"
+                  src="https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=900&q=80"
                   alt=""
                   className="w-full h-full object-cover"
                 />
