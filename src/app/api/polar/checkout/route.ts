@@ -11,7 +11,11 @@ const accessToken = isSandbox
   : process.env.POLAR_ACCESS_TOKEN;
 
 export async function GET(request: NextRequest) {
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://hr-ai-delta.vercel.app";
+  // Use request origin so it works on any domain (production, preview, local)
+  const origin = request.headers.get("origin") ||
+    request.headers.get("referer")?.split("/").slice(0, 3).join("/") ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    "https://hr-ai-delta.vercel.app";
 
   if (!accessToken) {
     return NextResponse.json({ error: "Polar is not configured" }, { status: 503 });
@@ -21,7 +25,7 @@ export async function GET(request: NextRequest) {
     const { Checkout } = await import("@polar-sh/nextjs");
     const handler = Checkout({
       accessToken,
-      successUrl: `${appUrl}/payment/success`,
+      successUrl: `${origin}/payment/success`,
       server: isSandbox ? "sandbox" : "production",
     });
     return handler(request);
