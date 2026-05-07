@@ -1,10 +1,20 @@
 import Link from "next/link";
-import { createClient } from "../../supabase/server";
 import { ArrowUpRight } from "lucide-react";
 
+// Try to get user — never crash if Supabase is unavailable
+async function getUser() {
+  try {
+    const { createClient } = await import("../../supabase/server");
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    return user;
+  } catch {
+    return null;
+  }
+}
+
 export default async function MarketingNav() {
-  const supabase = createClient();
-  const { data: { user } } = await (await supabase).auth.getUser();
+  const user = await getUser();
 
   return (
     <nav className="sticky top-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
@@ -45,7 +55,7 @@ export default async function MarketingNav() {
                 href="/dashboard"
                 className="flex items-center gap-1.5 px-4 py-2 bg-white text-black rounded-full text-sm font-semibold hover:bg-white/90 transition-all"
               >
-                Dashboard <ArrowUpRight size={14} />
+                Go to App <ArrowUpRight size={14} />
               </Link>
             </>
           ) : (
