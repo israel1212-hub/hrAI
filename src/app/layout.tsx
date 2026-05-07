@@ -3,6 +3,7 @@ import { Syne, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { TempoInit } from "@/components/tempo-init";
 import { ThemeProvider } from "@/components/theme-provider";
+import SplashScreen from "@/components/splash-screen";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <SplashScreen />
           {children}
         </ThemeProvider>
         <TempoInit />
