@@ -1,6 +1,7 @@
 import Link from "next/link";
 import MarketingNav from "@/components/marketing-nav";
 import Footer from "@/components/footer";
+import { CheckCircle, Star } from "lucide-react";
 
 export default function Home() {
   return (
@@ -8,67 +9,126 @@ export default function Home() {
       <MarketingNav />
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="bg-white pt-28 pb-16">
+      <section className="bg-white pt-28 pb-20">
         <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[85vh]">
 
-            {/* LEFT */}
+            {/* ── LEFT ─────────────────────────────────────────────────── */}
             <div className="flex flex-col justify-center">
-              <h1 className="text-[#0F172A] text-5xl sm:text-6xl font-black leading-[1.08] mb-6 tracking-tight font-jakarta">
+
+              {/* Star rating social proof */}
+              <div className="flex items-center gap-2 mb-6">
+                <div className="flex">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-[#64748B] text-sm">Trusted by <strong className="text-[#0F172A]">12,000+</strong> hiring teams</span>
+              </div>
+
+              {/* Headline */}
+              <h1 className="text-[#0F172A] text-5xl sm:text-6xl font-black leading-[1.08] mb-5 tracking-tight font-jakarta">
                 Welcome to the{" "}
                 <span className="italic font-light text-[#7C3AED]">AI</span>
                 <br />
                 <span className="italic font-light text-[#7C3AED]">hiring</span>{" "}
                 platform
               </h1>
+
+              {/* Subtext */}
               <p className="text-[#64748B] text-base leading-relaxed mb-8 max-w-[420px]">
                 Generate interview questions, score candidates automatically, and make confident hiring decisions — all in one place.
               </p>
-              <div className="flex items-center gap-3 flex-wrap">
-                <Link href="/sign-up" className="px-6 py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-all shadow-sm">
-                  Get Started
+
+              {/* Feature bullets */}
+              <div className="flex flex-col gap-2 mb-8">
+                {[
+                  "AI-generated questions for any role",
+                  "Automatic scoring & hire/reject decisions",
+                  "Free to start — no credit card needed",
+                ].map((f) => (
+                  <div key={f} className="flex items-center gap-2">
+                    <CheckCircle size={15} className="text-[#7C3AED] shrink-0" />
+                    <span className="text-[#475569] text-sm">{f}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* CTAs */}
+              <div className="flex items-center gap-3 flex-wrap mb-8">
+                <Link
+                  href="/sign-up"
+                  className="px-7 py-3.5 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-all shadow-[0_4px_14px_rgba(124,58,237,0.35)]"
+                >
+                  Get Started Free
                 </Link>
-                <Link href="/sign-in" className="px-6 py-3 bg-white border border-[#E2E8F0] text-[#0F172A] rounded-xl font-semibold text-sm hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all shadow-sm">
-                  Watch Demo
+                <Link
+                  href="/sign-in"
+                  className="px-7 py-3.5 bg-white border border-[#E2E8F0] text-[#0F172A] rounded-xl font-semibold text-sm hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all"
+                >
+                  Sign In →
                 </Link>
+              </div>
+
+              {/* Trusted by logos */}
+              <div>
+                <p className="text-[#94A3B8] text-xs mb-3 uppercase tracking-widest">Used by teams at</p>
+                <div className="flex items-center gap-5 flex-wrap">
+                  {["Stripe", "Vercel", "Linear", "Notion", "Figma"].map((b) => (
+                    <span key={b} className="text-[#CBD5E1] text-sm font-bold hover:text-[#94A3B8] transition-colors">{b}</span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* RIGHT — Abstract image + floating stat cards */}
-            <div className="relative h-[480px] hidden lg:block">
+            {/* ── RIGHT — Image + floating cards ───────────────────────── */}
+            <div className="relative h-[560px] hidden lg:block">
 
-              {/* Abstract flowing light image */}
-              <div className="absolute inset-0 rounded-3xl overflow-hidden">
+              {/* Background image */}
+              <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=900&q=80"
                   alt="Abstract AI neural pattern"
                   className="w-full h-full object-cover"
                 />
-                {/* Subtle white fade on left edge to blend with white bg */}
-                <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent" />
+                <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white/20 to-transparent" />
               </div>
 
-              {/* Stat card 1 — top left, floating */}
-              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-white/60 shadow-lg w-44">
+              {/* Stat card 1 — top left */}
+              <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-md rounded-2xl p-5 border border-[#F1F5F9] shadow-xl w-44">
                 <p className="text-[#0F172A] text-3xl font-black tracking-tight font-jakarta">12k+</p>
                 <p className="text-[#94A3B8] text-xs mt-1">Candidates screened</p>
+                <div className="mt-2 h-1 bg-[#F1F5F9] rounded-full overflow-hidden">
+                  <div className="h-full w-[75%] bg-[#7C3AED] rounded-full" />
+                </div>
               </div>
 
-              {/* Stat card 2 — bottom right, floating */}
-              <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md rounded-2xl p-5 border border-white/60 shadow-lg w-48">
+              {/* Stat card 2 — middle right */}
+              <div className="absolute top-1/2 -translate-y-1/2 right-6 bg-white/95 backdrop-blur-md rounded-2xl p-5 border border-[#F1F5F9] shadow-xl w-44">
                 <p className="text-[#0F172A] text-3xl font-black tracking-tight font-jakarta">94%</p>
                 <p className="text-[#94A3B8] text-xs mt-1">Scoring accuracy</p>
                 <div className="flex items-center mt-3">
-                  {["A","B","C","D","E"].map((l, i) => (
+                  {["A","B","C","D"].map((l, i) => (
                     <div
                       key={l}
                       className="w-6 h-6 rounded-full border-2 border-white flex items-center justify-center text-white text-[8px] font-bold"
-                      style={{ marginLeft: i === 0 ? 0 : -6, zIndex: 5 - i, backgroundColor: ["#7C3AED","#4F6EF7","#2563EB","#7C3AED","#A78BFA"][i] }}
+                      style={{ marginLeft: i === 0 ? 0 : -6, zIndex: 4 - i, backgroundColor: ["#7C3AED","#4F6EF7","#2563EB","#A78BFA"][i] }}
                     >
                       {l}
                     </div>
                   ))}
-                  <span className="text-[#64748B] text-[9px] ml-1.5">+80k users</span>
+                  <span className="text-[#64748B] text-[9px] ml-1.5">+80k</span>
+                </div>
+              </div>
+
+              {/* Stat card 3 — bottom left */}
+              <div className="absolute bottom-6 left-6 bg-[#7C3AED] backdrop-blur-md rounded-2xl p-5 shadow-xl w-44">
+                <p className="text-white text-3xl font-black tracking-tight font-jakarta">3.2k</p>
+                <p className="text-white/70 text-xs mt-1">Hires made this month</p>
+                <div className="flex items-center gap-1 mt-2">
+                  <div className="w-2 h-2 rounded-full bg-green-400" />
+                  <span className="text-white/70 text-[9px]">+18% vs last month</span>
                 </div>
               </div>
 
