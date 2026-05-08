@@ -1,7 +1,7 @@
 import Link from "next/link";
 import MarketingNav from "@/components/marketing-nav";
 import Footer from "@/components/footer";
-import { CheckCircle, Star } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
 export default function Home() {
   return (
@@ -15,16 +15,6 @@ export default function Home() {
 
             {/* ── LEFT ─────────────────────────────────────────────────── */}
             <div className="flex flex-col justify-center">
-
-              {/* Star rating social proof */}
-              <div className="flex items-center gap-2 mb-6">
-                <div className="flex">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />
-                  ))}
-                </div>
-                <span className="text-[#64748B] text-sm">Trusted by <strong className="text-[#0F172A]">12,000+</strong> hiring teams</span>
-              </div>
 
               {/* Headline */}
               <h1 className="text-[#0F172A] text-5xl sm:text-6xl font-black leading-[1.08] mb-5 tracking-tight font-jakarta">
