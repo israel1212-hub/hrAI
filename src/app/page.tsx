@@ -1,7 +1,6 @@
 import Link from "next/link";
 import MarketingNav from "@/components/marketing-nav";
 import Footer from "@/components/footer";
-import { CheckCircle } from "lucide-react";
 
 export default function Home() {
   return (
@@ -29,20 +28,6 @@ export default function Home() {
               <p className="text-[#64748B] text-base leading-relaxed mb-8 max-w-[420px]">
                 Generate interview questions, score candidates automatically, and make confident hiring decisions — all in one place.
               </p>
-
-              {/* Feature bullets */}
-              <div className="flex flex-col gap-2 mb-8">
-                {[
-                  "Auto-generated questions for any role",
-                  "Automatic scoring & hire/reject decisions",
-                  "Free to start — no credit card needed",
-                ].map((f) => (
-                  <div key={f} className="flex items-center gap-2">
-                    <CheckCircle size={15} className="text-[#7C3AED] shrink-0" />
-                    <span className="text-[#475569] text-sm">{f}</span>
-                  </div>
-                ))}
-              </div>
 
               {/* CTAs */}
               <div className="flex items-center gap-3 flex-wrap mb-8">
