@@ -85,7 +85,7 @@ export default function PaymentPage() {
             )}
           </div>
           <p className="text-[#64748B] text-sm mt-1">
-            Remove all limits and unlock the full HireMind AI experience
+            Remove all limits and unlock the full HireMind experience
             {process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox" && (
               <span className="text-amber-600 font-medium"> · No real money charged</span>
             )}

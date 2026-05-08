@@ -11,7 +11,7 @@ export default function Footer() {
           {/* Logo + tagline */}
           <div className="flex flex-col items-center md:items-start gap-2">
             <Link href="/" className="flex items-center gap-2">
-              <span className="font-black text-lg font-jakarta text-[#0F172A] tracking-tight">HireMind AI</span>
+              <span className="font-black text-lg font-jakarta text-[#0F172A] tracking-tight">HireMind</span>
             </Link>
             <p className="text-[#0F172A] text-xs">Hiring platform for modern teams</p>
           </div>
@@ -55,7 +55,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-8 pt-6 border-t border-[#F1F5F9] flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-[#0F172A] text-xs font-medium">© {currentYear} HireMind AI — All Systems Normal</p>
+          <p className="text-[#0F172A] text-xs font-medium">© {currentYear} HireMind — All Systems Normal</p>
           <p className="text-[#0F172A] text-xs font-medium">All rights reserved.</p>
         </div>
       </div>

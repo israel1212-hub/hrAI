@@ -29,7 +29,7 @@ export default function Home() {
               {/* Headline */}
               <h1 className="text-[#0F172A] text-5xl sm:text-6xl font-black leading-[1.08] mb-5 tracking-tight font-jakarta">
                 Welcome to the{" "}
-                <span className="italic font-light text-[#7C3AED]">AI</span>
+                <span className="italic font-light text-[#7C3AED]">smart</span>
                 <br />
                 <span className="italic font-light text-[#7C3AED]">hiring</span>{" "}
                 platform
@@ -43,7 +43,7 @@ export default function Home() {
               {/* Feature bullets */}
               <div className="flex flex-col gap-2 mb-8">
                 {[
-                  "AI-generated questions for any role",
+                  "Auto-generated questions for any role",
                   "Automatic scoring & hire/reject decisions",
                   "Free to start — no credit card needed",
                 ].map((f) => (
@@ -88,7 +88,7 @@ export default function Home() {
               <div className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=900&q=80"
-                  alt="Abstract AI neural pattern"
+                  alt="Abstract neural pattern"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent" />

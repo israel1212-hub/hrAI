@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Zap, Settings, CheckCircle, MessageSquare, ChevronDown, ChevronUp } from "lucide-react";
 
 const ITEMS = [
-  { icon: Zap, title: "AI Auto-Scoring", body: "Our scoring engine automatically evaluates every response using keyword matching and word-count thresholds — giving you instant, objective scores on a 0–10 scale." },
+  { icon: Zap, title: "Auto-Scoring", body: "Our scoring engine automatically evaluates every response using keyword matching and word-count thresholds — giving you instant, objective scores on a 0–10 scale." },
   { icon: Settings, title: "Question Builder", body: "Build your own question bank with custom categories, point weights, minimum word counts, and scoring keywords. Drag to reorder questions in any session." },
   { icon: CheckCircle, title: "Results & Export", body: "Every session generates a full performance report with per-question scores, candidate answers, and a performance tier. Download as a text file or copy to clipboard." },
   { icon: MessageSquare, title: "Session Management", body: "All interview sessions are saved to your account. Review past sessions, compare candidates, and track your hiring pipeline over time." },

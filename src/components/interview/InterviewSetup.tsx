@@ -36,7 +36,7 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
             </svg>
           </div>
           <h1 className="text-[#0F172A] text-2xl font-extrabold mb-1.5 font-syne">
-            HireMind AI Interview
+            HireMind Interview
           </h1>
           <p className="text-[#64748B] text-sm">
             Answer structured questions and receive instant scoring

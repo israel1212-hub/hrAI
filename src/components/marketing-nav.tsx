@@ -41,7 +41,7 @@ export default function MarketingNav() {
                 </svg>
               </div>
               <span className="font-black text-sm font-jakarta text-[#0F172A] tracking-tight">
-                HireMind AI
+                HireMind
               </span>
             </Link>
 

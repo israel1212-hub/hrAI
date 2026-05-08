@@ -28,13 +28,13 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
           <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
             <Brain size={14} className="text-white" />
           </div>
-          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind AI</span>
+          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind</span>
         </Link>
 
         {/* Form */}
         <div className="w-full max-w-[360px] mx-auto">
           <h1 className="text-2xl font-bold text-[#0F172A] font-syne mb-1">Create Account</h1>
-          <p className="text-[#64748B] text-sm mb-8">Start hiring smarter with AI</p>
+          <p className="text-[#64748B] text-sm mb-8">Start hiring smarter today</p>
 
           <UrlProvider>
             <form className="flex flex-col gap-4">
@@ -108,7 +108,7 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
           </p>
           <div className="space-y-3">
             {[
-              { icon: <Brain size={15} />, text: "AI generates role-specific interview questions" },
+              { icon: <Brain size={15} />, text: "Auto-generates role-specific interview questions" },
               { icon: <BarChart3 size={15} />, text: "Automatic scoring with keyword analysis" },
               { icon: <ClipboardList size={15} />, text: "Structured sessions with full candidate history" },
               { icon: <CheckCircle size={15} />, text: "Clear hire / maybe / reject recommendations" },
@@ -127,7 +127,7 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
         <div className="relative z-10">
           <div className="bg-white/10 rounded-2xl p-5 backdrop-blur-sm border border-white/10">
             <p className="text-white text-sm leading-relaxed mb-4">
-              "We went from 2-week screening processes to 2 days. HireMind AI is a game changer for our hiring team."
+              "We went from 2-week screening processes to 2 days. HireMind is a game changer for our hiring team."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-full bg-gradient-to-br from-pink-400 to-purple-500 flex items-center justify-center text-white font-bold text-sm">

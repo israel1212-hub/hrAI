@@ -28,7 +28,7 @@ export default async function ForgotPassword(props: { searchParams: Promise<Mess
           <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
             <Brain size={14} className="text-white" />
           </div>
-          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind AI</span>
+          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind</span>
         </Link>
 
         {/* Form */}

@@ -31,7 +31,7 @@ export default async function SignInPage({ searchParams }: LoginProps) {
           <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
             <Brain size={14} className="text-white" />
           </div>
-          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind AI</span>
+          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind</span>
         </Link>
 
         {/* Form */}
@@ -116,7 +116,7 @@ export default async function SignInPage({ searchParams }: LoginProps) {
         <div className="relative z-10">
           <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/10 mb-6">
             <p className="text-white text-base leading-relaxed mb-4">
-              "HireMind AI cut our screening time by 70%. The AI scoring is incredibly accurate — we hired our best engineer through it."
+              "HireMind cut our screening time by 70%. The scoring is incredibly accurate — we hired our best engineer through it."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white font-bold text-sm">
