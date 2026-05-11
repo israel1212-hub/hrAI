@@ -55,7 +55,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-8 pt-6 border-t border-[#F1F5F9] flex items-center justify-center">
-          <p className="text-[#E2E8F0] text-xs">© 2026 HireMind — All Systems Normal</p>
+          <p className="text-xs font-light tracking-widest uppercase text-[#B8C8DC]">© 2026 HireMind — All Systems Normal</p>
         </div>
       </div>
     </footer>
