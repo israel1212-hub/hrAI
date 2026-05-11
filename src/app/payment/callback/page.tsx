@@ -79,9 +79,14 @@ function PaymentCallbackContent() {
             <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
             <h2 className="text-xl font-bold text-[#0F172A] font-syne mb-2">Payment Failed</h2>
             <p className="text-[#64748B] text-sm mb-6">{message}</p>
-            <Link href="/payment" className="inline-flex items-center gap-2 px-6 py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-colors">
-              Try Again
-            </Link>
+            <div className="flex flex-col gap-3">
+              <Link href="/payment" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-colors">
+                Try Again
+              </Link>
+              <Link href="/dashboard" className="inline-flex items-center justify-center gap-2 px-6 py-3 border border-[#E2E8F0] text-[#64748B] rounded-xl font-semibold text-sm hover:text-[#0F172A] hover:border-[#CBD5E1] transition-colors">
+                Back to Dashboard
+              </Link>
+            </div>
           </>
         )}
       </div>

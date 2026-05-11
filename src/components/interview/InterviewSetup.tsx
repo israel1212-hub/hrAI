@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 interface InterviewSetupProps {
   onStart: (candidateName: string, roleTitle: string) => void;
@@ -21,6 +23,16 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#EEF2FF] via-[#F0F4FF] to-[#E8EEFF] flex items-center justify-center px-4 py-16">
       <div className="absolute inset-0 opacity-[0.35] pointer-events-none bg-grid-blue" />
+
+      {/* Back to Dashboard */}
+      <div className="absolute top-5 left-5 z-20">
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-1.5 text-[#64748B] text-xs hover:text-[#2563EB] transition-colors"
+        >
+          <ArrowLeft size={13} /> Back to Dashboard
+        </Link>
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}

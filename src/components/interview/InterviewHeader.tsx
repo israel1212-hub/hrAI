@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 interface InterviewHeaderProps {
   roleTitle: string;
@@ -33,7 +34,13 @@ export default function InterviewHeader({
               <p className="text-[#64748B] text-xs">{candidateName}</p>
             </div>
           </div>
-          <div className="text-right">
+          <div className="flex items-center gap-4">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-1 text-[#64748B] text-xs hover:text-white transition-colors"
+            >
+              <ArrowLeft size={12} /> Dashboard
+            </Link>
             <span className="text-[#94A3B8] text-sm">
               Question{" "}
               <span className="text-[#2563EB] font-bold">{currentQuestion}</span>

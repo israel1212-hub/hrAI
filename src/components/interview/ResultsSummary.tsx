@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { getPerformanceTier, getScoreColor } from "@/types/interview";
 import type { AnswerWithQuestion } from "@/types/interview";
 import { useState } from "react";
-import { Download, Copy, Check, ArrowLeft } from "lucide-react";
+import { Download, Copy, Check, ArrowLeft, LayoutDashboard } from "lucide-react";
+import Link from "next/link";
 
 interface ResultsSummaryProps {
   answers: AnswerWithQuestion[];
@@ -167,7 +168,7 @@ export default function ResultsSummary({
           </button>
         </motion.div>
 
-        <div className="text-center mt-6">
+        <div className="text-center mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
             type="button"
             onClick={onNewInterview}
@@ -175,6 +176,12 @@ export default function ResultsSummary({
           >
             <ArrowLeft size={14} /> Start New Interview
           </button>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-1.5 text-[#2563EB] text-sm font-semibold hover:text-[#1d53d4] transition-colors"
+          >
+            <LayoutDashboard size={14} /> Back to Dashboard
+          </Link>
         </div>
       </div>
     </div>
