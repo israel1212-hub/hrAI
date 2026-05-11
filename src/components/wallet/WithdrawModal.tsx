@@ -60,7 +60,7 @@ export default function WithdrawModal({ plan, balance, onClose, onUpgrade }: Pro
             <div className="w-8 h-8 rounded-xl bg-orange-50 flex items-center justify-center">
               <Minus size={15} className="text-orange-600" />
             </div>
-            <span className="font-bold text-[#0F172A] font-syne">Withdraw to MoMo</span>
+            <span className="font-bold text-[#0F172A] font-jakarta">Withdraw to MoMo</span>
           </div>
           <button onClick={onClose} aria-label="Close modal" className="text-[#94A3B8] hover:text-[#0F172A] transition-colors">
             <X size={18} />

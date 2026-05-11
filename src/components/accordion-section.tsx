@@ -29,7 +29,7 @@ export default function AccordionSection() {
                 <div className="w-8 h-8 rounded-xl bg-[#FFF3E0] flex items-center justify-center text-[#F59E0B]">
                   <Icon size={15} />
                 </div>
-                <span className={`font-bold text-sm font-syne ${isOpen ? "text-[#2563EB]" : "text-[#0F172A]"}`}>
+                <span className={`font-bold text-sm font-jakarta ${isOpen ? "text-[#2563EB]" : "text-[#0F172A]"}`}>
                   {item.title}
                 </span>
               </div>

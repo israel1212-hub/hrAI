@@ -28,7 +28,7 @@ export default async function ForgotPassword(props: { searchParams: Promise<Mess
           <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
             <Brain size={14} className="text-white" />
           </div>
-          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind</span>
+          <span className="font-bold text-sm text-[#0F172A] font-jakarta">HireMind</span>
         </Link>
 
         {/* Form */}
@@ -36,7 +36,7 @@ export default async function ForgotPassword(props: { searchParams: Promise<Mess
           <div className="w-12 h-12 rounded-2xl bg-[#F3F0FF] flex items-center justify-center mb-5">
             <Mail size={22} className="text-[#7C3AED]" />
           </div>
-          <h1 className="text-2xl font-bold text-[#0F172A] font-syne mb-1">Reset Password</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] font-jakarta mb-1">Reset Password</h1>
           <p className="text-[#64748B] text-sm mb-8">
             Enter your email and we&apos;ll send you a reset link
           </p>
@@ -86,7 +86,7 @@ export default async function ForgotPassword(props: { searchParams: Promise<Mess
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-white/5 translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10 space-y-6">
-          <h2 className="text-white text-3xl font-extrabold font-syne leading-tight">
+          <h2 className="text-white text-3xl font-extrabold font-jakarta leading-tight">
             Secure account<br />recovery
           </h2>
           <p className="text-white/70 text-sm leading-relaxed">

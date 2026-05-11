@@ -72,7 +72,7 @@ export default function ResultsSummary({
           <div className="inline-flex items-center gap-2 bg-[#0F172A] text-white px-4 py-1.5 rounded-full text-xs font-semibold mb-5">
             <Check size={12} /> Interview Complete
           </div>
-          <h1 className="text-[#0F172A] text-3xl font-extrabold mb-1 font-syne">{candidateName}</h1>
+          <h1 className="text-[#0F172A] text-3xl font-extrabold mb-1 font-jakarta">{candidateName}</h1>
           <p className="text-[#64748B] text-sm">{roleTitle}</p>
         </motion.div>
 
@@ -84,10 +84,10 @@ export default function ResultsSummary({
           className="bg-white rounded-2xl p-7 shadow-sm border border-[#E8EDF5] mb-5 text-center"
         >
           <div className="mb-1">
-            <span className="text-6xl font-extrabold font-syne" style={{ color: tier.color }}>
+            <span className="text-6xl font-extrabold font-jakarta" style={{ color: tier.color }}>
               {totalScore}
             </span>
-            <span className="text-2xl font-bold text-[#94A3B8] font-syne">/{maxScore}</span>
+            <span className="text-2xl font-bold text-[#94A3B8] font-jakarta">/{maxScore}</span>
           </div>
 
           <div className="my-5">
@@ -129,7 +129,7 @@ export default function ResultsSummary({
                     <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#EEF4FF] text-[#2563EB] uppercase tracking-wider mb-1.5">
                       {answer.question.category}
                     </span>
-                    <h3 className="text-[#0F172A] font-bold text-sm leading-snug font-syne">
+                    <h3 className="text-[#0F172A] font-bold text-sm leading-snug font-jakarta">
                       {answer.question.question_text}
                     </h3>
                   </div>

@@ -49,7 +49,7 @@ function MockPaymentContent() {
         <div className="bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] p-6 text-white">
           <div className="flex items-center gap-2 mb-1">
             <CreditCard size={18} />
-            <span className="font-bold font-syne">{title}</span>
+            <span className="font-bold font-jakarta">{title}</span>
           </div>
           {desc && <p className="text-white/70 text-xs">{desc}</p>}
         </div>
@@ -60,7 +60,7 @@ function MockPaymentContent() {
               {/* Amount */}
               <div className="text-center mb-6">
                 <p className="text-[#64748B] text-sm mb-1">Amount to pay</p>
-                <p className="text-4xl font-extrabold text-[#0F172A] font-syne">
+                <p className="text-4xl font-extrabold text-[#0F172A] font-jakarta">
                   {parseInt(amount).toLocaleString()}
                   <span className="text-xl text-[#64748B] ml-1">{currency}</span>
                 </p>
@@ -114,7 +114,7 @@ function MockPaymentContent() {
           {step === "processing" && (
             <div className="text-center py-8">
               <Loader2 className="w-12 h-12 text-[#7C3AED] animate-spin mx-auto mb-4" />
-              <p className="font-bold text-[#0F172A] font-syne mb-1">Processing Payment</p>
+              <p className="font-bold text-[#0F172A] font-jakarta mb-1">Processing Payment</p>
               <p className="text-[#64748B] text-sm">Please wait…</p>
             </div>
           )}
@@ -122,7 +122,7 @@ function MockPaymentContent() {
           {step === "done" && (
             <div className="text-center py-8">
               <CheckCircle className="w-12 h-12 text-green-500 mx-auto mb-4" />
-              <p className="font-bold text-[#0F172A] font-syne mb-1">Payment Successful!</p>
+              <p className="font-bold text-[#0F172A] font-jakarta mb-1">Payment Successful!</p>
               <p className="text-[#64748B] text-sm">Redirecting you back…</p>
             </div>
           )}

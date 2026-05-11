@@ -58,7 +58,7 @@ export default function SendMoneyModal({ plan, onClose, onUpgrade }: Props) {
             <div className="w-8 h-8 rounded-xl bg-[#F3F0FF] flex items-center justify-center">
               <Send size={15} className="text-[#7C3AED]" />
             </div>
-            <span className="font-bold text-[#0F172A] font-syne">Send Money</span>
+            <span className="font-bold text-[#0F172A] font-jakarta">Send Money</span>
           </div>
           <button onClick={onClose} aria-label="Close modal" className="text-[#94A3B8] hover:text-[#0F172A] transition-colors">
             <X size={18} />

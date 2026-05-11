@@ -63,7 +63,7 @@ export default function UpgradeModal({ reason, onClose }: Props) {
           <div className="relative z-10">
             <div className="flex items-center gap-2 mb-2">
               <Crown size={20} className="text-yellow-300" />
-              <span className="font-bold text-lg font-syne">Upgrade to Premium</span>
+              <span className="font-bold text-lg font-jakarta">Upgrade to Premium</span>
             </div>
             {reason && (
               <p className="text-white/80 text-sm">{reason}</p>
@@ -102,7 +102,7 @@ export default function UpgradeModal({ reason, onClose }: Props) {
           {/* Price */}
           <div className="text-center mb-5">
             <div className="flex items-baseline justify-center gap-1">
-              <span className="text-4xl font-extrabold text-[#0F172A] font-syne">
+              <span className="text-4xl font-extrabold text-[#0F172A] font-jakarta">
                 {price.toLocaleString()}
               </span>
               <span className="text-[#64748B] text-sm">RWF/{billing === "monthly" ? "mo" : "yr"}</span>

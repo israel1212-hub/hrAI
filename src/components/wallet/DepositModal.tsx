@@ -117,7 +117,7 @@ export default function DepositModal({ plan, currentBalance, onClose, onUpgrade 
             <div className="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center">
               <Plus size={15} className="text-green-600" />
             </div>
-            <span className="font-bold text-[#0F172A] font-syne">Deposit via MoMo</span>
+            <span className="font-bold text-[#0F172A] font-jakarta">Deposit via MoMo</span>
           </div>
           <button
             onClick={onClose}
@@ -257,7 +257,7 @@ export default function DepositModal({ plan, currentBalance, onClose, onUpgrade 
                   <Clock size={12} className="text-white" />
                 </div>
               </div>
-              <h3 className="font-bold text-[#0F172A] font-syne mb-2">Check Your Phone!</h3>
+              <h3 className="font-bold text-[#0F172A] font-jakarta mb-2">Check Your Phone!</h3>
               <p className="text-[#64748B] text-sm mb-1">
                 A USSD prompt has been sent to
               </p>
@@ -282,7 +282,7 @@ export default function DepositModal({ plan, currentBalance, onClose, onUpgrade 
           {step === "success" && (
             <div className="text-center py-6">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h3 className="font-bold text-[#0F172A] font-syne mb-2">Deposit Successful!</h3>
+              <h3 className="font-bold text-[#0F172A] font-jakarta mb-2">Deposit Successful!</h3>
               <p className="text-[#64748B] text-sm mb-6">{message}</p>
               <button
                 onClick={onClose}
@@ -297,7 +297,7 @@ export default function DepositModal({ plan, currentBalance, onClose, onUpgrade 
           {step === "failed" && (
             <div className="text-center py-6">
               <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-              <h3 className="font-bold text-[#0F172A] font-syne mb-2">Deposit Failed</h3>
+              <h3 className="font-bold text-[#0F172A] font-jakarta mb-2">Deposit Failed</h3>
               <p className="text-[#64748B] text-sm mb-6">{message}</p>
               <div className="flex gap-3 justify-center">
                 <button

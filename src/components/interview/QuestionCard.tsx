@@ -82,7 +82,7 @@ export default function QuestionCard({
           </div>
 
           {/* Question */}
-          <h2 className="text-[#0F172A] text-xl sm:text-2xl leading-snug font-extrabold mb-6 font-syne">
+          <h2 className="text-[#0F172A] text-xl sm:text-2xl leading-snug font-extrabold mb-6 font-jakarta">
             {question.question_text}
           </h2>
 

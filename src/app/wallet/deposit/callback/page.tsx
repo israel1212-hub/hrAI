@@ -56,14 +56,14 @@ function DepositCallbackContent() {
         {status === "loading" && (
           <>
             <Loader2 className="w-16 h-16 text-[#7C3AED] animate-spin mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-[#0F172A] font-syne mb-2">Verifying Payment</h2>
+            <h2 className="text-xl font-bold text-[#0F172A] font-jakarta mb-2">Verifying Payment</h2>
             <p className="text-[#64748B] text-sm">Please wait while we confirm your deposit…</p>
           </>
         )}
         {status === "success" && (
           <>
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-[#0F172A] font-syne mb-2">Deposit Successful!</h2>
+            <h2 className="text-xl font-bold text-[#0F172A] font-jakarta mb-2">Deposit Successful!</h2>
             <p className="text-[#64748B] text-sm mb-6">{message}</p>
             <p className="text-xs text-[#94A3B8]">Redirecting to wallet…</p>
           </>
@@ -71,7 +71,7 @@ function DepositCallbackContent() {
         {status === "failed" && (
           <>
             <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-[#0F172A] font-syne mb-2">Payment Failed</h2>
+            <h2 className="text-xl font-bold text-[#0F172A] font-jakarta mb-2">Payment Failed</h2>
             <p className="text-[#64748B] text-sm mb-6">{message}</p>
             <div className="flex flex-col gap-3">
               <Link href="/wallet" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#7C3AED] text-white rounded-xl font-semibold text-sm hover:bg-[#6D28D9] transition-colors">

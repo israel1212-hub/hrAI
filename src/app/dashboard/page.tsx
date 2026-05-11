@@ -38,7 +38,7 @@ export default async function Dashboard() {
       {/* ── Header row ─────────────────────────────────────────────────── */}
       <div className="flex items-center justify-between mb-2">
         <div>
-          <h1 className="text-[#0F172A] text-xl font-bold font-syne">Overview</h1>
+          <h1 className="text-[#0F172A] text-xl font-bold font-jakarta">Overview</h1>
           <p className="text-[#94A3B8] text-xs mt-0.5">Your main activities data</p>
         </div>
         <div className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export default async function Dashboard() {
               <span className="text-[#64748B] text-xs">{s.label}</span>
               <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${s.badge.color}`}>{s.badge.text}</span>
             </div>
-            <p className="text-[#0F172A] text-xl font-extrabold font-syne mb-1">{s.value}</p>
+            <p className="text-[#0F172A] text-xl font-extrabold font-jakarta mb-1">{s.value}</p>
             <div className="flex items-center gap-1 text-[#94A3B8] text-[10px]">
               {s.icon} {s.sub}
             </div>
@@ -100,7 +100,7 @@ export default async function Dashboard() {
       <div className="bg-white rounded-xl border border-[#F1F5F9] shadow-sm p-5">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <p className="text-[#0F172A] text-sm font-bold font-syne">Activity</p>
+            <p className="text-[#0F172A] text-sm font-bold font-jakarta">Activity</p>
             <p className="text-[#94A3B8] text-xs">Interviews and transactions</p>
           </div>
           <ArrowUpRight size={14} className="text-[#94A3B8]" />
@@ -129,7 +129,7 @@ export default async function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Quick actions */}
         <div className="bg-white rounded-xl border border-[#F1F5F9] shadow-sm p-5">
-          <p className="text-[#0F172A] text-sm font-bold font-syne mb-4">Quick Actions</p>
+          <p className="text-[#0F172A] text-sm font-bold font-jakarta mb-4">Quick Actions</p>
           <div className="grid grid-cols-2 gap-2">
             <Link href="/wallet" className="flex flex-col items-center gap-2 p-4 rounded-xl bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] text-white hover:opacity-90 transition-opacity">
               <Wallet size={20} />
@@ -153,7 +153,7 @@ export default async function Dashboard() {
         {/* Recent transactions */}
         <div className="bg-white rounded-xl border border-[#F1F5F9] shadow-sm p-5">
           <div className="flex items-center justify-between mb-4">
-            <p className="text-[#0F172A] text-sm font-bold font-syne">Recent Transactions</p>
+            <p className="text-[#0F172A] text-sm font-bold font-jakarta">Recent Transactions</p>
             <Link href="/wallet" className="text-[10px] text-[#7C3AED] font-semibold hover:underline">View all</Link>
           </div>
           {(transactions || []).length === 0 ? (

@@ -20,7 +20,7 @@ export default function PaymentSuccessPage() {
         <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#7C3AED] to-[#4F6EF7] flex items-center justify-center mx-auto mb-5">
           <Crown className="w-10 h-10 text-white" />
         </div>
-        <h1 className="text-2xl font-extrabold text-[#0F172A] font-syne mb-2">
+        <h1 className="text-2xl font-extrabold text-[#0F172A] font-jakarta mb-2">
           Welcome to Premium! 🎉
         </h1>
         <p className="text-[#64748B] text-sm mb-6">

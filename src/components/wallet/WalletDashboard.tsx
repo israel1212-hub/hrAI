@@ -122,7 +122,7 @@ export default function WalletDashboard({ wallet, userProfile, transactions }: W
           </div>
 
           <div className="mt-3 mb-4">
-            <span className="text-4xl font-extrabold font-syne tracking-tight">
+            <span className="text-4xl font-extrabold font-jakarta tracking-tight">
               {formatRWF(wallet.balance)}
             </span>
             <span className="text-white/60 text-sm ml-2">RWF</span>
@@ -248,7 +248,7 @@ export default function WalletDashboard({ wallet, userProfile, transactions }: W
         ].map((s) => (
           <div key={s.label} className={`${s.bg} rounded-xl p-3`}>
             <div className="flex items-center gap-1.5 mb-1">{s.icon}<span className="text-[10px] text-[#64748B]">{s.label}</span></div>
-            <p className="text-[#0F172A] font-bold text-sm font-syne">{s.value}</p>
+            <p className="text-[#0F172A] font-bold text-sm font-jakarta">{s.value}</p>
           </div>
         ))}
       </div>
@@ -256,7 +256,7 @@ export default function WalletDashboard({ wallet, userProfile, transactions }: W
       {/* ── Recent Transactions ───────────────────────────────────────────── */}
       <div className="bg-white rounded-2xl border border-[#F1F5F9] shadow-sm overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-[#F8FAFC]">
-          <span className="text-sm font-bold text-[#0F172A] font-syne">Recent Transactions</span>
+          <span className="text-sm font-bold text-[#0F172A] font-jakarta">Recent Transactions</span>
           <button aria-label="Refresh transactions" className="text-[#94A3B8] hover:text-[#7C3AED] transition-colors">
             <RefreshCw size={13} />
           </button>

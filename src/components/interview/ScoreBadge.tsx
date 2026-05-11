@@ -22,7 +22,7 @@ export default function ScoreBadge({ score, maxScore, visible }: ScoreBadgeProps
           transition={{ type: "spring", stiffness: 400, damping: 20 }}
           className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full border font-bold text-sm ${colorClass}`}
         >
-          <span className="text-base font-extrabold font-syne">{score}</span>
+          <span className="text-base font-extrabold font-jakarta">{score}</span>
           <span className="text-xs font-normal opacity-70">/ {maxScore}</span>
         </motion.div>
       )}

@@ -96,7 +96,7 @@ export default function AdminPanel({ initialQuestions, userId }: AdminPanelProps
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-[#0F172A] text-xl font-extrabold font-syne">Question Builder</h1>
+          <h1 className="text-[#0F172A] text-xl font-extrabold font-jakarta">Question Builder</h1>
           <p className="text-[#64748B] text-xs mt-0.5">
             {questions.length} question{questions.length !== 1 ? "s" : ""} · Drag to reorder
           </p>
@@ -211,7 +211,7 @@ export default function AdminPanel({ initialQuestions, userId }: AdminPanelProps
               className="bg-white rounded-2xl p-7 w-full max-w-[540px] shadow-2xl"
             >
               <div className="flex items-center justify-between mb-5">
-                <h2 className="text-[#0F172A] text-lg font-extrabold font-syne">
+                <h2 className="text-[#0F172A] text-lg font-extrabold font-jakarta">
                   {editingId ? "Edit Question" : "New Question"}
                 </h2>
                 <button type="button" onClick={() => setShowForm(false)} aria-label="Close"

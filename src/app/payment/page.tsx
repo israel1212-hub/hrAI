@@ -75,7 +75,7 @@ export default function PaymentPage() {
             <ArrowLeft size={13} /> Back to Dashboard
           </Link>
           <div className="flex items-center gap-3 mb-1">
-            <h1 className="text-2xl font-extrabold text-[#0F172A] font-syne">
+            <h1 className="text-2xl font-extrabold text-[#0F172A] font-jakarta">
               Upgrade to Premium
             </h1>
             {process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox" && (
@@ -123,9 +123,9 @@ export default function PaymentPage() {
               <div className="w-8 h-8 rounded-xl bg-[#F8FAFC] flex items-center justify-center">
                 <Lock size={15} className="text-[#64748B]" />
               </div>
-              <span className="font-bold text-[#0F172A] font-syne">Free Plan</span>
+              <span className="font-bold text-[#0F172A] font-jakarta">Free Plan</span>
             </div>
-            <p className="text-3xl font-extrabold text-[#0F172A] font-syne mb-1">
+            <p className="text-3xl font-extrabold text-[#0F172A] font-jakarta mb-1">
               0 <span className="text-base text-[#64748B]">RWF</span>
             </p>
             <p className="text-[#94A3B8] text-xs mb-5">Forever free</p>
@@ -151,13 +151,13 @@ export default function PaymentPage() {
                 <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center">
                   <Crown size={15} className="text-yellow-300" />
                 </div>
-                <span className="font-bold font-syne">Premium Plan</span>
+                <span className="font-bold font-jakarta">Premium Plan</span>
                 <span className="ml-auto bg-yellow-400/20 border border-yellow-400/30 text-yellow-300 text-[9px] font-bold px-2 py-0.5 rounded-full">
                   RECOMMENDED
                 </span>
               </div>
               <div className="flex items-baseline gap-1 mb-1">
-                <span className="text-3xl font-extrabold font-syne">
+                <span className="text-3xl font-extrabold font-jakarta">
                   {price.toLocaleString()}
                 </span>
                 <span className="text-white/60 text-sm">
@@ -193,7 +193,7 @@ export default function PaymentPage() {
                 <path d="M8 12h8M12 8v8" stroke="white" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </div>
-            <h3 className="font-bold text-[#0F172A] font-syne">Pay with Polar</h3>
+            <h3 className="font-bold text-[#0F172A] font-jakarta">Pay with Polar</h3>
           </div>
           <p className="text-[#64748B] text-xs mb-5">
             Secure checkout · Merchant of Record · Tax handled automatically

@@ -31,12 +31,12 @@ export default async function SignInPage({ searchParams }: LoginProps) {
           <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
             <Brain size={14} className="text-white" />
           </div>
-          <span className="font-bold text-sm text-[#0F172A] font-syne">HireMind</span>
+          <span className="font-bold text-sm text-[#0F172A] font-jakarta">HireMind</span>
         </Link>
 
         {/* Form */}
         <div className="w-full max-w-[360px] mx-auto">
-          <h1 className="text-2xl font-bold text-[#0F172A] font-syne mb-1">Welcome Back</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] font-jakarta mb-1">Welcome Back</h1>
           <p className="text-[#64748B] text-sm mb-8">Please login to your account</p>
 
           <form className="flex flex-col gap-4">
@@ -106,7 +106,7 @@ export default async function SignInPage({ searchParams }: LoginProps) {
           ].map((s) => (
             <div key={s.label} className="bg-white/10 rounded-2xl p-4 backdrop-blur-sm border border-white/10">
               <div className="text-white/60 mb-2">{s.icon}</div>
-              <p className="text-white font-bold text-xl font-syne">{s.value}</p>
+              <p className="text-white font-bold text-xl font-jakarta">{s.value}</p>
               <p className="text-white/60 text-xs mt-0.5">{s.label}</p>
             </div>
           ))}
