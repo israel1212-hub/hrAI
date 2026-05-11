@@ -18,9 +18,7 @@ export default function Home() {
               {/* Headline */}
               <h1 className="text-[#0F172A] text-5xl sm:text-6xl font-black leading-[1.08] mb-5 tracking-tight font-jakarta">
                 Welcome to the{" "}
-                <span className="italic font-light text-[#7C3AED]">smart</span>
-                <br />
-                <span className="italic font-light text-[#7C3AED]">hiring</span>{" "}
+                <span className="italic font-light text-[#7C3AED]">smart hiring</span>{" "}
                 platform
               </h1>
 
