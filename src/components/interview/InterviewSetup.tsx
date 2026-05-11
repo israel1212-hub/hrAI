@@ -42,14 +42,15 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
       >
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#2563EB] shadow-lg mb-4">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
-          <h1 className="text-[#0F172A] text-2xl font-extrabold mb-1.5 font-syne">
-            HireMind Interview
-          </h1>
+          <Link href="/" className="inline-flex items-center gap-2 mb-4">
+            <div className="w-10 h-10 rounded-2xl bg-[#7C3AED] flex items-center justify-center shadow-lg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
+            </div>
+            <span className="text-[#0F172A] text-xl font-black font-jakarta tracking-tight">HireMind</span>
+          </Link>
           <p className="text-[#64748B] text-sm">
             Answer structured questions and receive instant scoring
           </p>

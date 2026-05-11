@@ -24,9 +24,10 @@ export default function InterviewHeader({
       <div className="max-w-[680px] mx-auto px-5 py-3.5">
         <div className="flex items-center justify-between mb-2.5">
           <div className="flex items-center gap-3">
-            <Link href="/" className="w-7 h-7 rounded-lg bg-[#2563EB] flex items-center justify-center shrink-0">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            <Link href="/" className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center shrink-0">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
               </svg>
             </Link>
             <div>
