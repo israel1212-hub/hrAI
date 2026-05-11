@@ -12,8 +12,10 @@ export default function Hero() {
           <div className="text-left max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#0F172A] mb-8 tracking-tight leading-[1.1] text-left">
               Welcome to the{" "}
-              <span className="text-[#7C3AED] italic font-bold">smart hiring </span>
-              platform
+              <span className="text-[#7C3AED] italic font-bold">smart</span>
+              <br />
+              <span className="text-[#7C3AED] italic font-bold">hiring</span>
+              {" "}platform
             </h1>
             
             <p className="text-xl text-gray-600 mb-12 max-w-2xl leading-relaxed">
