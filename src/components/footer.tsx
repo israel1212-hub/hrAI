@@ -1,19 +1,17 @@
 import Link from "next/link";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="bg-white border-t border-[#F1F5F9]">
       <div className="max-w-[1100px] mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row items-start justify-start gap-8">
+        <div className="flex flex-col items-start gap-6">
 
           {/* Logo + tagline */}
-          <div className="flex flex-col items-center md:items-start gap-2">
+          <div className="flex flex-col items-start gap-1.5">
             <Link href="/" className="flex items-center gap-2">
               <span className="font-black text-lg font-jakarta text-[#0F172A] tracking-tight">HireMind</span>
             </Link>
-            <p className="text-[#0F172A] text-xs">Hiring platform for modern teams</p>
+            <p className="text-[#94A3B8] text-xs">Hiring platform for modern teams</p>
           </div>
 
           {/* Nav links */}
@@ -51,6 +49,7 @@ export default function Footer() {
               </svg>
             </a>
           </div>
+
         </div>
 
         {/* Bottom bar */}
