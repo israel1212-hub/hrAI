@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-[#F1F5F9]">
       <div className="max-w-[1100px] mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="flex flex-col md:flex-row items-start justify-start gap-8">
 
           {/* Logo + tagline */}
           <div className="flex flex-col items-center md:items-start gap-2">
@@ -17,7 +17,7 @@ export default function Footer() {
           </div>
 
           {/* Nav links */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <nav className="flex flex-wrap items-center justify-start gap-x-5 gap-y-2">
             {[
               { label: "Features", href: "#features" },
               { label: "How it works", href: "#how-it-works" },
@@ -27,7 +27,7 @@ export default function Footer() {
               { label: "Privacy", href: "#" },
               { label: "Licence", href: "#" },
             ].map((l) => (
-              <Link key={l.label} href={l.href} className="text-[#0F172A] hover:text-[#7C3AED] text-sm transition-colors font-medium">
+              <Link key={l.label} href={l.href} className="text-[#64748B] hover:text-[#7C3AED] text-xs transition-colors font-medium">
                 {l.label}
               </Link>
             ))}
