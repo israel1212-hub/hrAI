@@ -25,7 +25,7 @@ export default function Home() {
               </h1>
 
               {/* Subtext */}
-              <p className="text-[#64748B] text-base leading-relaxed mb-8 max-w-[420px]">
+              <p className="text-[#64748B] text-sm leading-relaxed mb-8 max-w-[340px]">
                 Generate interview questions, score candidates automatically, and make confident hiring decisions — all in one place.
               </p>
 
