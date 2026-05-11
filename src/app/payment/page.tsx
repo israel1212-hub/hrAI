@@ -79,16 +79,12 @@ export default function PaymentPage() {
               Upgrade to Premium
             </h1>
             {process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox" && (
-              <span className="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded-full border border-amber-200">
-                🧪 TEST MODE
+              <span className="hidden">
               </span>
             )}
           </div>
           <p className="text-[#64748B] text-sm mt-1">
             Remove all limits and unlock the full HireMind experience
-            {process.env.NEXT_PUBLIC_POLAR_MODE === "sandbox" && (
-              <span className="text-amber-600 font-medium"> · No real money charged</span>
-            )}
           </p>
         </div>
 
