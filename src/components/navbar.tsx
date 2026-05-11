@@ -17,7 +17,7 @@ export default async function Navbar() {
               <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
             </svg>
           </div>
-          <span className="text-white font-black text-2xl font-jakarta tracking-tight font-script">HireMind</span>
+          <span className="text-white font-black text-lg font-jakarta tracking-tight font-script">HireMind</span>
         </Link>
 
         {/* Nav links */}

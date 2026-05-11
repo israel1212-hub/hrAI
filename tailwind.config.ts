@@ -21,7 +21,6 @@ const config = {
   		fontFamily: {
   			syne: ['var(--font-syne)', 'Syne', 'sans-serif'],
   			jakarta: ['var(--font-jakarta)', 'Plus Jakarta Sans', 'sans-serif'],
-  			script: ['var(--font-script)', 'Dancing Script', 'cursive'],
   		},
   		colors: {
   			border: 'hsl(var(--border))',
