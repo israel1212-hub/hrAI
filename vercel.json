@@ -1,5 +1,5 @@
 {
   "buildCommand": "next build --webpack",
   "framework": "nextjs",
-  "alias": ["hr-ai-delta.vercel.app"]
+  "alias": ["hr-ai-delta.vercel.app", "hrai-kappa.vercel.app"]
 }
