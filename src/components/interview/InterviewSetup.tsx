@@ -49,7 +49,7 @@ export default function InterviewSetup({ onStart }: InterviewSetupProps) {
                 <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
               </svg>
             </div>
-            <span className="text-[#0F172A] text-xl font-black font-jakarta tracking-tight">HireMind</span>
+            <span className="text-[#0F172A] text-xl font-black font-jakarta tracking-tight font-script">HireMind</span>
           </Link>
           <p className="text-[#64748B] text-sm">
             Answer structured questions and receive instant scoring

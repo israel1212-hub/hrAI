@@ -28,7 +28,7 @@ export default async function Signup(props: { searchParams: Promise<Message> }) 
           <div className="w-7 h-7 rounded-lg bg-[#7C3AED] flex items-center justify-center">
             <Brain size={14} className="text-white" />
           </div>
-          <span className="font-bold text-sm text-[#0F172A] font-jakarta">HireMind</span>
+          <span className="font-bold text-sm text-[#0F172A] font-jakarta font-script">HireMind</span>
         </Link>
 
         {/* Form */}

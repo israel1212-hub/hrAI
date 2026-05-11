@@ -37,7 +37,7 @@ export default function SplashScreen() {
 
         {/* Name */}
         <div className="text-center">
-          <p className="text-white text-2xl font-extrabold font-jakarta tracking-tight splash-text-glow">
+          <p className="text-white text-2xl font-extrabold font-script tracking-tight splash-text-glow">
             HireMind
           </p>
           <p className="text-white/40 text-xs mt-1 tracking-widest uppercase">Loading…</p>
