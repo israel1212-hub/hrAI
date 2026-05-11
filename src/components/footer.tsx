@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Logo + tagline */}
           <div className="flex flex-col items-start gap-1.5">
             <Link href="/" className="flex items-center gap-2">
-              <span className="font-black text-lg font-jakarta text-[#0F172A] tracking-tight font-script">HireMind</span>
+              <span className="font-black text-2xl font-jakarta text-[#0F172A] tracking-tight font-script">HireMind</span>
             </Link>
             <p className="text-[#94A3B8] text-xs">Hiring platform for modern teams</p>
           </div>
